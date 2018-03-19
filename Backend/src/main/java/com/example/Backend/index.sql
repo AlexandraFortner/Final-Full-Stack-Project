@@ -6,14 +6,14 @@
 --        password_hash varchar(250)
 --    );
 
---    create table story(
---        id serial unique primary key,
---        story_title varchar(200),
---        story_date current_date?????,
---        story text,
---        genre ????to_be_decided_at_a_later_date????,
---        stars (or votes) int
---    );
+    create table story(
+        id serial unique primary key,
+        story_title varchar(350),
+        story_date date,
+        story text,
+        genre_id int references genre (id),
+        votes int
+    );
 
 --    create table genre(
 --    id serial unique primary key,
