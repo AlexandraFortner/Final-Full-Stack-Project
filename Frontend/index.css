@@ -1,0 +1,77 @@
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+.SpaceBackground{
+    background-image: url('https://i.pinimg.com/originals/44/22/2b/44222b7f0c96ab2a7c7f90b6206d0b07.jpg');
+    
+    /* Full height */
+    height: 100%;
+    width: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    height:100%;
+}
+
+.halfSpaceBackground{
+    background-image: url('https://i.pinimg.com/originals/44/22/2b/44222b7f0c96ab2a7c7f90b6206d0b07.jpg');
+    
+    /* Full height */
+    height: 35%;
+    width: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#titleNovaX{
+    /*empty for now*/
+}
+
+#movingImages {
+    position:relative;
+    height:281px;
+    width:450px;
+    margin:0 auto;
+  }
+  
+#movingImages img {
+    position:absolute;
+    left:0;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+}
+
+@keyframes movingImagesFadeOut {
+        0% {
+        opacity:1;
+      }
+      45% {
+      opacity:1;
+      }
+      55% {
+      opacity:0;
+      }
+      100% {
+      opacity:0;
+      }
+}
+      
+#romance img.top {
+      animation-name: movingImagesFadeOut;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-duration: 2s;
+      animation-direction: alternate;
+}

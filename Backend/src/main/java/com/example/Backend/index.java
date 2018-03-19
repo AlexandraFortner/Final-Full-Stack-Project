@@ -1,10 +1,6 @@
 package com.example.Backend;
 import java.util.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class index {
@@ -13,7 +9,7 @@ public class index {
         return x + y;
     }
 
-    @GetMapping("/readInventory")
+    @GetMapping("/homepage")
     public static String homepage() {
         return "Hello World";
     }
