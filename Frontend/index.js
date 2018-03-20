@@ -3,7 +3,7 @@ var PAGE_DATA = {};
 API_URL = 'http://localhost:8080/';
 
 function storyHtml(story) {
-    return ('<li>' + escape(story.body) + '</li>'); // DON'T ACTUALLY ALLOW SPAMMY TABLES; ESCAPE post.body
+    return ('<li>' + _.escape(story.body) + '</li>'); // DON'T ACTUALLY ALLOW SPAMMY TABLES; ESCAPE post.body
 }
 function storiesHtml(stories) {
     return stories.map(storyHtml).join('');

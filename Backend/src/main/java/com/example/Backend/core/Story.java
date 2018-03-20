@@ -19,13 +19,14 @@ public class Story {
                  String body,
                  Integer genre_id,
                  Integer votes ) {
-        id = id;
-        author_id = author_id;
-        title = title;
-        date = date;
-        body = body;
-        genre_id = genre_id;
-        votes = votes;
+        this.id = id;
+        this.author_id = author_id;
+        this.title = title;
+        this.date = date;
+        this.body = body;
+        this.genre_id = genre_id;
+        this.votes = votes;
+        this.votes = votes;
 
     }
 
