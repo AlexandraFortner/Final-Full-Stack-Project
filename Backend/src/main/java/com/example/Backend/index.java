@@ -11,6 +11,6 @@ public class index {
 
     @GetMapping("/homepage")
     public static String homepage() {
-        return "Hello World";
+        return "";
     }
 }
