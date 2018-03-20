@@ -12,24 +12,83 @@
     <link rel="stylesheet" href="index.css">
 </head>
 
-<body>
-    <div class='container SpaceBackground'>
-        <div class="col-lg-8">
-            <img id="titleNovaX" class="img-responsive" src="static/images/Nova.png" />
-            <!-- <div id="movingImages">
+<section class="content">
+
+    <body>
+        <center>
+            <div class='container container-fluid SpaceBackground'>
+                <div class="col-lg-9 panel panel-default">
+                    <img id="titleNova" class="img-responsive" src="static/images/NovaMoondance.png" />
+                    <!-- <div id="movingImages">
                 <img id="romance" class="top img-responsive" src="static/images/romance.jpeg" />
                 <img class="bottom img-responsive" src="static/images/mystery.jpeg" />
             </div> -->
+                    <form id="new-story-form">
+                        <div>
+                            <label for="author">Author:</label>
+                            <input type="text" name="author">
+                        </div>
+                        <div>
+                            <label for="title">Title:</label>
+                            <input type="text" name="title">
+                        </div>
+                        <div>
+                            <label for="story">Story:</label>
+                            <textarea name="story" cols="30" rows="10"></textarea>
+                        </div>
 
-            <h3>All Stories:</h3>
-            <ul id="existing-stories">
-            </ul>
-        </div>
-    </div>
-    <script src="vendor/jquery.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <script src="vendor/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
-    <script src="index.js"></script>
-</body>
+                        <input type="submit" value="Publish!">
+                    </form>
+                    <h3>All Stories:</h3>
+                    <ul id="existing-stories">
+                    </ul>
+                    <!-- <div class="sidebar">
+                        <div class="block">
+                            <h2>Genres</h2>
+                            <ul>
+                                <li>
+                                    <a title="" href="#">Black &amp; white</a> (4)</li>
+                                <li>
+                                    <a title="" href="#">Fantasies</a> (3)</li>
+                                <li>
+                                    <a title="" href="#">Music</a> (3)</li>
+                                <li>
+                                    <a title="" href="#">Nature</a> (3)</li>
+                                <li>
+                                    <a title="" href="#">Portraits</a> (2)</li>
+                                <li>
+                                    <a title="" href="#">Urban</a> (2)</li>
+                            </ul>
+                        </div>
+                        <div class="block">
+                            <h2>Archives</h2>
+                            <ul>
+                                <li>
+                                    <a title="" href="#">July 2011</a> (5)</li>
+                                <li>
+                                    <a title="" href="#">June 2011</a> (5)</li>
+                                <li>
+                                    <a title="" href="#">May 2011</a> (5)</li>
+                                <li>
+                                    <a title="" href="#">April 2011</a> (5)</li>
+                                <li>
+                                    <a title="" href="#">March 2011</a> (5)</li>
+                                <li>
+                                    <a title="" href="#">February 2011</a> (5)</li>
+                                <li>
+                                    <a title="" href="#">January 2011</a> (5)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div> 
+                </div>-->
+        </center>
+        <script src="vendor/jquery.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+        <script src="vendor/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+        <script src="index.js"></script>
+    </body>
+</section>
 
 </html>

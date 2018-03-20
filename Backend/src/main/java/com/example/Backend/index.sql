@@ -10,6 +10,7 @@
 
 --    create table stories(
 --        id serial unique primary key,
+--        story_author_id int references users(id),
 --        story_title varchar(350),
 --        story_date date,
 --        story text,
