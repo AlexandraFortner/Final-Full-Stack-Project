@@ -5,7 +5,7 @@ API_URL = 'http://localhost:8080/';
 function storyHtml(story) {
     return ('<li>' + escape(story.body) + '</li>'); // DON'T ACTUALLY ALLOW SPAMMY TABLES; ESCAPE post.body
 }
-function storiesHtml(posts) {
+function storiesHtml(stories) {
     return stories.map(storyHtml).join('');
 }
 function initializeExistingStoriesView(stories) {
@@ -47,4 +47,4 @@ document.getElementById('new-story-form').onsubmit = event => {
 }
 window.onload = () => fetch('http://localhost:8080/stories/')
     .then(response => response.json())
-    .then(initializeExistingPostsView);
+    .then(initializeExistingStoriesView);

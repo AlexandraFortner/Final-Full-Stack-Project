@@ -30,14 +30,14 @@ public class Stories {
                     String titles = rs.getString("story_title");
                     allstories.add(new Story(
                             rs.getInt("id"),
-                            rs.getInt("author_id"),
+                            rs.getInt("story_author_id"),
                             rs.getString("story_title"),
                             rs.getDate("story_date"),
                             rs.getString("story"),
                             rs.getInt("genre_id"),
                             rs.getInt("votes")
                     ));
-    //                ABOVE PARENTHESES() GETS SQL COLUMN NAMES
+                    // ABOVE PARENTHESES() GETS SQL COLUMN NAMES
             }
             return allstories;
         }

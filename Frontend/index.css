@@ -81,7 +81,8 @@ h1, h2, h3 {
     color: black;
 }
 
-.panel-default {
+.panel-default {    
+    left: 25%;
     background: #dddddddc;
     border-color:#764f8c;
     border-style: solid;
@@ -92,8 +93,7 @@ h1, h2, h3 {
 section.content {
     overflow:hidden;
     position:relative;
-    width:960px;
-    /* background:transparent url(../images/cbg.png) repeat-x scroll center top; */
+    /* width:960px; */
     -moz-border-radius:15px;
     -webkit-border-radius:15px;
     border-radius:15px;
