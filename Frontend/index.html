@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
-    <link rel="stylesheet" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="vendor/bootstrap-4.0.0-dist/css/bootstrap.css">
     <script src='https://use.fontawesome.com/8fb0ae1b82.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="index.css">
@@ -16,33 +16,44 @@
 
     <body>
         <center>
-            <div class='container container-fluid SpaceBackground'>
-                <div class="col-lg-6 col-md-2 panel panel-default">
-                    <img id="titleNova" class="img-responsive" src="static/images/NovaMoondance.png" />
-                    <!-- <div id="movingImages">
-                <img id="romance" class="top img-responsive" src="static/images/romance.jpeg" />
-                <img class="bottom img-responsive" src="static/images/mystery.jpeg" />
-            </div> -->
-                    <form id="new-story-form">
-                        <div>
-                            <label for="author">Author:</label>
-                            <input type="text" name="author">
+            <div class='container container-fluid'>
+                <div class="row">
+                    <div class="col-lg-6 col-md-2 panel panel-default">
+                        <div class="jumbotron text-center">
+                            <img id="titleNova" class="img-responsive" src="static/images/NovaMoondance2.png" />
                         </div>
-                        <div>
-                            <label for="title">Title:</label>
-                            <input type="text" name="title">
+                        <br>
+                        <!-- <div id="movingImages">
+                        <img id="romance" class="top img-responsive" src="static/images/romance.jpeg" />
+                        <img class="bottom img-responsive" src="static/images/mystery.jpeg" />
+                    </div> -->
+                        <div class="row">
+                            <form id="new-story-form">
+                                <div class="d-flex p-2">
+                                    <label for="author">Author:</label>
+                                    <input type="text" name="author">
+                                </div>
+                                <div class="d-flex p-2">
+                                    <label for="title">Title:&emsp;</label>
+                                    <input type="text" name="title">
+                                </div>
+                                <div class="d-flex p-2">
+                                    <label for="story">Story:</label>
+                                    <textarea name="story"></textarea>
+                                </div>
+                                <input type="submit" value="Publish!">
+                            </form>
                         </div>
-                        <div>
-                            <label for="story">Story:</label>
-                            <textarea name="story" cols="30" rows="10"></textarea>
+                        <h3>All Stories:</h3>
+                        <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                            <div class="card-header">Header</div>
+                            <div class="card-body">
+                                <h4 class="card-title">Primary card title</h4>
+                                <p id="existing-stories" class="card-text"></p>
+                            </div>
                         </div>
 
-                        <input type="submit" value="Publish!">
-                    </form>
-                    <h3>All Stories:</h3>
-                    <ul id="existing-stories">
-                    </ul>
-                    <!-- <div class="sidebar">
+                        <!-- <div class="sidebar">
                         <div class="block">
                             <h2>Genres</h2>
                             <ul>
@@ -87,7 +98,7 @@
         <script src="https://unpkg.com/underscore"></script>
         <script src="vendor/jquery.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-        <script src="vendor/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+        <script src="vendor/bootstrap-4.0.0-dist/js/bootstrap.js"></script>
         <script src="index.js"></script>
     </body>
 </section>
