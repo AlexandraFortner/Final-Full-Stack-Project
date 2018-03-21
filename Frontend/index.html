@@ -10,49 +10,50 @@
     <script src='https://use.fontawesome.com/8fb0ae1b82.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css?family=BenchNine:700" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/alertify.js-0.3.11/themes/alertify.core.css" />
+    <link rel="stylesheet" href="vendor/alertify.js-0.3.11/themes/alertify.default.css" />
 </head>
 
 <section class="content">
 
     <body>
-        <center>
-            <div class='container container-fluid'>
-                <div class="row">
-                    <div class="col-lg-6 col-sm-12 offset-lg-3 panel panel-default">
-                        <div class="jumbotron text-center">
-                            <img id="titleNova" class="img-responsive" src="static/images/NovaMoondance.png" />
-                        </div>
-                        <br>
-                        <!-- <div id="movingImages">
+        <div class="container">
+            <div class="col-lg-6 col-sm-12 offset-lg-3 panel panel-default">
+                <div class="jumbotron text-center" style="border-style: solid;border-color: #00BBA0;">
+                    <img id="titleNova" class="img-responsive" src="static/images/NovaMoondance.png" />
+                </div>
+                <!-- <div id="movingImages">
                             <img id="romance" class="top img-responsive" src="static/images/romance.jpeg" />
                             <img class="bottom img-responsive" src="static/images/mystery.jpeg" />
                         </div> -->
-                        <div class="row">
-                            <form id="new-story-form">
-                                <div class=" col-25">
-                                    <label for="author">Author:</label>
-                                    <input class="col-75" type="text" name="author">
-                                </div>
-                                <div class="col-25">
-                                    <label for="title">Title:&emsp;</label>
-                                    <input class="col-75" type="text" name="title">
-                                </div>
-                                <div class="col-25">
-                                    <label for="story">Story:&emsp;</label>
-                                    <textarea name="story"></textarea>
-                                </div>
-                                <input type="submit" value="Publish!">
-                            </form>
-                        </div>
-                        <h3>All Stories:</h3>
-                        <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
-                            <div class="card-header">Header</div>
-                            <div class="card-body">
-                                <h4 id="existing-story-titles" class="card-title">Primary card title</h4>
-                                <p id="existing-stories" class="card-text"></p>
-                            </div>
-                        </div>
-                        <!-- <div class="sidebar">
+                <form id="new-story-form">
+                    <div class="form-group">
+                        <label for="author">Author</label>
+                        <input type="text" class="form-control" name="author" aria-describedby="authorHelp">
+                        <small id="authorHelp" class="form-text text-muted">Enter username.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" name="title" aria-describedby="titleHelp">
+                        <small id="titleHelp" class="form-text text-muted">Enter title of story.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="story">Story Summary</label>
+                        <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                    </div>
+                    <input type="submit" value="Publish!">
+                </form>
+                <h3>All Stories:</h3>
+                <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
+                    <div id="existing-authors" class="card-header"></div>
+                    <div class="card-body">
+                        <h4 id="existing-titles" class="card-title"></h4>
+                        <p id="existing-stories" class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="sidebar">
                         <div class="block">
                             <h2>Genres</h2>
                             <ul>
@@ -93,12 +94,11 @@
                     <div class="clear"></div>
                 </div> 
             </div>-->
-        </center>
-        <script src="https://unpkg.com/underscore"></script>
-        <script src="vendor/jquery.js"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-        <script src="vendor/bootstrap-4.0.0-dist/js/bootstrap.js"></script>
-        <script src="index.js"></script>
+            <script src="https://unpkg.com/underscore"></script>
+            <script src="vendor/jquery.js"></script>
+            <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+            <script src="vendor/bootstrap-4.0.0-dist/js/bootstrap.js"></script>
+            <script src="index.js"></script>
     </body>
 </section>
 

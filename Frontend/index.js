@@ -3,19 +3,32 @@ var PAGE_DATA = {};
 API_URL = 'http://localhost:8080/';
 
 // SHOWING EXISTING STORY BODYS
-function titleHtml(story) {
-    return (_.escape(story.title));
+function getAuthor(story) {
+    return (_.escape(story.author));
 }
-// function title
-function storyHtml(story) {
+function getTitle(story) {
+    return (_.escape(story.title) + '<hr>');
+}
+function getStory(story) {
     return (_.escape(story.body)); // DON'T ACTUALLY ALLOW SPAMMY TABLES; ESCAPE post.body
 }
+
+function authorsHtml(stories) {
+    return stories.map(getAuthor).join('');
+}
+function titlesHtml(stories) {
+    return stories.map(getTitle).join('');
+}
 function storiesHtml(stories) {
-    return stories.map(storyHtml).join('');
+    return stories.map(getStory).join('');
 }
 function initializeExistingStoriesView(stories) {
     let storiesDiv = document.getElementById('existing-stories')
+    let titlesDiv = document.getElementById('existing-titles')
+    let authorsDiv = document.getElementById('existing-authors')
     storiesDiv.innerHTML = storiesHtml(stories);
+    titlesDiv.innerHTML = titlesHtml(stories);
+    authorsDiv.innerHTML = authorsHtml(stories);
 }
 function moveNewStoryToExistingStories() {
     let form = document.getElementById('new-story-form')
