@@ -2,8 +2,13 @@ var PAGE_DATA = {};
 
 API_URL = 'http://localhost:8080/';
 
+// SHOWING EXISTING STORY BODYS
+function titleHtml(story) {
+    return (_.escape(story.title));
+}
+// function title
 function storyHtml(story) {
-    return ('<li>' + _.escape(story.body) + '</li>'); // DON'T ACTUALLY ALLOW SPAMMY TABLES; ESCAPE post.body
+    return (_.escape(story.body)); // DON'T ACTUALLY ALLOW SPAMMY TABLES; ESCAPE post.body
 }
 function storiesHtml(stories) {
     return stories.map(storyHtml).join('');

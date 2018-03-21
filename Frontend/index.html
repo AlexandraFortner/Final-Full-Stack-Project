@@ -18,27 +18,27 @@
         <center>
             <div class='container container-fluid'>
                 <div class="row">
-                    <div class="col-lg-6 col-md-2 panel panel-default">
+                    <div class="col-lg-6 col-sm-12 offset-lg-3 panel panel-default">
                         <div class="jumbotron text-center">
-                            <img id="titleNova" class="img-responsive" src="static/images/NovaMoondance2.png" />
+                            <img id="titleNova" class="img-responsive" src="static/images/NovaMoondance.png" />
                         </div>
                         <br>
                         <!-- <div id="movingImages">
-                        <img id="romance" class="top img-responsive" src="static/images/romance.jpeg" />
-                        <img class="bottom img-responsive" src="static/images/mystery.jpeg" />
-                    </div> -->
+                            <img id="romance" class="top img-responsive" src="static/images/romance.jpeg" />
+                            <img class="bottom img-responsive" src="static/images/mystery.jpeg" />
+                        </div> -->
                         <div class="row">
                             <form id="new-story-form">
-                                <div class="d-flex p-2">
+                                <div class=" col-25">
                                     <label for="author">Author:</label>
-                                    <input type="text" name="author">
+                                    <input class="col-75" type="text" name="author">
                                 </div>
-                                <div class="d-flex p-2">
+                                <div class="col-25">
                                     <label for="title">Title:&emsp;</label>
-                                    <input type="text" name="title">
+                                    <input class="col-75" type="text" name="title">
                                 </div>
-                                <div class="d-flex p-2">
-                                    <label for="story">Story:</label>
+                                <div class="col-25">
+                                    <label for="story">Story:&emsp;</label>
                                     <textarea name="story"></textarea>
                                 </div>
                                 <input type="submit" value="Publish!">
@@ -48,11 +48,10 @@
                         <div class="card text-white bg-dark mb-3" style="max-width: 20rem;">
                             <div class="card-header">Header</div>
                             <div class="card-body">
-                                <h4 class="card-title">Primary card title</h4>
+                                <h4 id="existing-story-titles" class="card-title">Primary card title</h4>
                                 <p id="existing-stories" class="card-text"></p>
                             </div>
                         </div>
-
                         <!-- <div class="sidebar">
                         <div class="block">
                             <h2>Genres</h2>
@@ -93,7 +92,7 @@
                     </div>
                     <div class="clear"></div>
                 </div> 
-                </div>-->
+            </div>-->
         </center>
         <script src="https://unpkg.com/underscore"></script>
         <script src="vendor/jquery.js"></script>

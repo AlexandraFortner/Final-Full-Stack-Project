@@ -227,7 +227,7 @@ nav ul li a:hover {
 
 input[type=text]:focus {
     border: 3px solid #555;
-}
+}*/
 
 textarea{
     resize:none;
@@ -235,4 +235,4 @@ textarea{
 
 textarea:focus {
     border: 3px solid #555;
-} */
+}
