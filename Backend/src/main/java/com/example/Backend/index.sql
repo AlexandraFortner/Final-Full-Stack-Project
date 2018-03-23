@@ -1,24 +1,30 @@
 --- ! TABLES !
 
---    create table users(
---        id serial unique primary key,
---        username varchar(150),
---        password_hash varchar(250),
---        profile_picture text,
---        profile_summary text
---    );
+    create table if not exists users(
+        id serial unique primary key,
+        username varchar(150),
+        password_hash varchar(250),
+        profile_picture text,
+        profile_summary text
+    );
 
---    create table stories(
---        id serial unique primary key,
---        story_author_id int references users(id),
---        story_title varchar(350),
---        story_date date,
---        story text,
---        genre_id int references genre (id),
---        votes int
---    );
+    create table if not exists stories(
+        id serial unique primary key,
+        story_author_id int references users(id),
+        story_title varchar(350),
+        story_date date,
+        story text,
+        genre_id int references genre (id),
+        votes int,
+        story_summary text
+    );
 
---    create table genre(
---    id serial unique primary key,
---    genre_name varchar(200)
---    );
+    create table if not exists genre(
+    id serial unique primary key,
+    genre_name varchar(200)
+    );
+
+--    ALTER TABLE stories
+--    ADD COLUMN story_summary text;
+
+--    UPDATE stories SET story_summary = 'The very first story made for Nova.' where id = 1;

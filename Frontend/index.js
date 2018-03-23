@@ -4,7 +4,7 @@ API_URL = 'http://localhost:8080/';
 
 // SHOWING EXISTING STORY BODYS
 function getAuthor(story) {
-    return (_.escape(story.author));
+    return (_.escape(story.author_id));
 }
 function getTitle(story) {
     return (_.escape(story.title) + '<hr>');

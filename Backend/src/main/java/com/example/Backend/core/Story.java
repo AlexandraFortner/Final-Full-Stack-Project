@@ -26,7 +26,6 @@ public class Story {
         this.body = body;
         this.genre_id = genre_id;
         this.votes = votes;
-        this.votes = votes;
 
     }
 

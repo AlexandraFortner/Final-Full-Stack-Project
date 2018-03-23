@@ -13,6 +13,12 @@ public class StoryController {
         return Stories.all();
     }
 
+    @CrossOrigin()
+    @GetMapping("/genres")
+    public List<Story> allGenres() {
+        return Stories.allGenres();
+    }
+
 //    @CrossOrigin()
 //    @PostMapping("/newStory")
 //    public Story newStory(@RequestBody Story story) {
