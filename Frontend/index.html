@@ -31,7 +31,7 @@
                     </div>
                     <div id="genre-form" class="form-group">
                         <label for="genre">Genre</label>
-                        <select id="genre" class="custom-select" aria-describedby="genreHelp">
+                        <select id="genre" class="custom-select" aria-describedby="genreHelp" style="font-size: 80%;">
                             <option value="1">Horror</option>
                             <option value="2">Action-Adventure</option>
                             <option value="3">Romance</option>
@@ -58,20 +58,23 @@
                     </div>
                     <div id="story-summary-form" class="form-group">
                         <label for="story-summary">Story Summary</label>
-                        <textarea class="form-control" id="storySummary" rows="3"></textarea>
+                        <textarea class="form-control" id="storySummary" rows="3" aria-describedby="storySummaryHelp"></textarea>
+                        <small id="storySummaryHelp" class="form-text text-muted">Enter story summary.</small>
                     </div>
                     <div id="story-form" class="form-group">
                         <label for="story">Story</label>
-                        <textarea class="form-control" id="story" rows="10"></textarea>
+                        <textarea class="form-control" id="story" rows="10" aria-describedby="storyHelp"></textarea>
+                        <small id="storyHelp" class="form-text text-muted">Enter story.</small>
                     </div>
                     <input type="submit" value="Publish!">
                 </form>
                 <div id="stories">
                     <h3>All Stories:</h3>
                     <div id="all-stories" class="card text-white bg-dark mb-3" style="max-width: 30rem;">
-                        <!-- <div id="existing-authors" class="card-header"></div> -->
+                        <div id="existing-authors" class="card-header"></div>
                         <div class="card-body">
                             <h4 id="existing-titles" class="card-title"></h4>
+                            <h4 id="existing-genres" class="card-title"></h4>
                             <p id="existing-stories" class="card-text"></p>
                         </div>
                     </div>

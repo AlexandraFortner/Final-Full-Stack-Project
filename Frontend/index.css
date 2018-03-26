@@ -62,6 +62,7 @@ h1, h2, h3 {
 }
 
 .panel-default {    
+    /* Chinese Violet Color: #846b8a */
     background: #dddddddc;
     border-color:#764f8c;
     border-style: solid;
