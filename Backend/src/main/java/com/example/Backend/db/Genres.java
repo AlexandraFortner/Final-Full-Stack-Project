@@ -10,11 +10,6 @@ import java.util.List;
 
 public class Genres {
 
-
-
-
-
-
     public static List<Story> allGenres() {
         try{
             Connection c = connect();
