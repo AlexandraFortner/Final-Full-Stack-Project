@@ -38,6 +38,23 @@ function storiesHtml(stories) {
     return stories.map(getStory).join('');
 }
 
+// JQUERY STARTS
+
+$("#navCreate").click(function (event) {
+    event.preventDefault();
+    alertify.log('You\'ve clicked Create!')
+});
+
+$("#navStories").click(function (event) {
+    event.preventDefault();
+    alertify.log('You\'re looking at Stories!')
+});
+
+$("#navAbout").click(function (event) {
+    event.preventDefault();
+    alertify.log('You\'re looking at About!')
+});
+
 function initializeExistingStoriesView(stories) {
     let storiesDiv = document.getElementById('existing-stories')
     let titlesDiv = document.getElementById('existing-titles')

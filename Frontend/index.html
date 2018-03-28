@@ -13,11 +13,39 @@
     <link href="https://fonts.googleapis.com/css?family=BenchNine:700" rel="stylesheet">
     <link rel="stylesheet" href="vendor/alertify.js-0.3.11/themes/alertify.core.css" />
     <link rel="stylesheet" href="vendor/alertify.js-0.3.11/themes/alertify.default.css" />
+
 </head>
 
 <section class="content">
 
     <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="font-size: 100%;">
+            <div id='navNova' class="navbar-brand" style="cursor: pointer;">NOVA</div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01"
+                aria-expanded="false" aria-label="Toggle navigation" style="">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <div id='navStories' class="nav-link" style="cursor: pointer;">Stories
+                            <span class="sr-only">(current)</span>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <div id='navCreate' class="nav-link" style="cursor: pointer;">Create</div>
+                    </li>
+                    <li class="nav-item">
+                        <div id='navAbout' class="nav-link" style="cursor: pointer;">About</div>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
         <div class="container">
             <div class="col-lg-6 col-sm-12 offset-lg-3 panel panel-default">
                 <div id="titleNova" class="jumbotron text-center" style="border-style: solid;border-color: #00BBA0;">
@@ -81,6 +109,7 @@
                 </div>
             </div>
             <script src="https://unpkg.com/underscore"></script>
+            <script src="vendor/alertify.js-0.3.11/src/alertify.js"></script>
             <script src="vendor/jquery.js"></script>
             <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
             <script src="vendor/bootstrap-4.0.0-dist/js/bootstrap.js"></script>

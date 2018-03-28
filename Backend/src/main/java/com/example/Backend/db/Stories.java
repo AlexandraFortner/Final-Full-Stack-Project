@@ -53,11 +53,10 @@ public class Stories {
                 try{
                     Connection c = connect();
                     PreparedStatement st = c.prepareStatement("insert into stories(story_author" +
-                            "_id, story_title, story_date, story, genre_id, votes) values(" story_author_id + "," +
-                            story_title + "," + story_date + "," + story + "," + genre_id + "," + votes")");
+                            "_id, story_title, story_date, story, genre_id, votes) values("  + story_author_id + "," +
+                            story_title + "," + story_date + "," + story + "," + genre_id + "," + votes +");");
                     st.execute();
                     }
-                }
                 catch (Exception e) {
                     e.printStackTrace();
                     System.err.println(e.getClass().getName()+": "+e.getMessage());
