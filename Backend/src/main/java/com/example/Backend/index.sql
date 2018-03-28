@@ -2,7 +2,7 @@
 
     create table if not exists users(
         id serial unique primary key,
-        username varchar(150),
+        username varchar(150) unique,
         password_hash varchar(250),
         profile_picture text,
         profile_summary text
@@ -10,7 +10,7 @@
 
     create table if not exists stories(
         id serial unique primary key,
-        story_author_id int references users(id),
+        story_author_name varchar(150) references users(username),
         story_title varchar(350),
         story_date date,
         story text,
@@ -19,10 +19,10 @@
         story_summary text
     );
 
-    create table if not exists genre(
-    id serial unique primary key,
-    genre_name varchar(200)
-    );
+--    create table if not exists genre(
+--    id serial unique primary key,
+--    genre_name varchar(200)
+--    );
 
 --    ALTER TABLE stories
 --    ADD COLUMN story_summary text;

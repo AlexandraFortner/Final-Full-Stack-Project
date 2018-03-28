@@ -30,12 +30,13 @@ public class Stories {
                     String titles = rs.getString("story_title");
                     allstories.add(new Story(
                             rs.getInt("id"),
-                            rs.getInt("story_author_id"),
+                            rs.getString("story_author_name"),
                             rs.getString("story_title"),
                             rs.getDate("story_date"),
                             rs.getString("story"),
                             rs.getInt("genre_id"),
-                            rs.getInt("votes")
+                            rs.getInt("votes"),
+                            rs.getString("story_summary")
                     ));
                     // ABOVE PARENTHESES() GETS SQL COLUMN NAMES
             }
@@ -49,12 +50,12 @@ public class Stories {
         }
     }
 
-            public static void create(Integer story_author_id, String story_title, String story_date, String story, Integer genre_id, Integer votes) {
+            public static void create(String story_author_name, String story_title, String story_date, String story, Integer genre_id, Integer votes, String story_summary) {
                 try{
                     Connection c = connect();
                     PreparedStatement st = c.prepareStatement("insert into stories(story_author" +
-                            "_id, story_title, story_date, story, genre_id, votes) values("  + story_author_id + "," +
-                            story_title + "," + story_date + "," + story + "," + genre_id + "," + votes +");");
+                            "_name, story_title, story_date, story, genre_id, votes, story_summary) values("  + story_author_name + "," +
+                            story_title + "," + story_date + "," + story + "," + genre_id + "," + votes + "," + story_summary +");");
                     st.execute();
                     }
                 catch (Exception e) {

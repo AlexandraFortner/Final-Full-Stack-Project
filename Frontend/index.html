@@ -19,28 +19,32 @@
 <section class="content">
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="font-size: 100%;">
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark" style="font-size: 100%;">
             <div id='navNova' class="navbar-brand" style="cursor: pointer;">NOVA</div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01"
-                aria-expanded="false" aria-label="Toggle navigation" style="">
+                aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <div id='navStories' class="nav-link" style="cursor: pointer;">Stories
-                            <span class="sr-only">(current)</span>
+                    <li id='navStories' class="nav-item active">
+                        <div class="nav-link" style="cursor: pointer;">Stories
+                            <span id="navStoriesActive" class="sr-only">(current)</span>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <div id='navCreate' class="nav-link" style="cursor: pointer;">Create</div>
+                    <li id='navCreate' class="nav-item">
+                        <div class="nav-link" style="cursor: pointer;">Create
+                            <span id="navCreateActive" class="sr-only">(current)</span>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <div id='navAbout' class="nav-link" style="cursor: pointer;">About</div>
+                    <li id='navAbout' class="nav-item">
+                        <div class="nav-link" style="cursor: pointer;">About
+                            <span id="navAboutActive" class="sr-only">(current)</span>
+                        </div>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
+                <form id="searchBar" class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
@@ -51,7 +55,7 @@
                 <div id="titleNova" class="jumbotron text-center" style="border-style: solid;border-color: #00BBA0;">
                     <img class="img-responsive" src="static/images/NovaMoondance.png" />
                 </div>
-                <form id="new-story-form">
+                <form id="new-story-form" hidden>
                     <div id="author-form" class="form-group">
                         <label for="author">Author</label>
                         <input id="author" type="text" class="form-control" name="author" aria-describedby="authorHelp">
@@ -106,6 +110,14 @@
                             <p id="existing-stories" class="card-text"></p>
                         </div>
                     </div>
+                </div>
+                <div id="about" hidden>
+                    Creator Name: Alexandra Fortner
+                    <br>Contact Information:
+                    <br>
+                    <a href="https://www.linkedin.com/in/alexandra-fortner-3207a9149/" target="_blank">My LinkedIn!</a>
+                    <br>
+                    <a href="https://github.com/AlexandraFortner" target="_blank">My Github!</a>
                 </div>
             </div>
             <script src="https://unpkg.com/underscore"></script>

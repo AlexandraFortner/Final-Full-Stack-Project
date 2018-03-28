@@ -12,7 +12,7 @@ var validations = {
 
 // SHOWING EXISTING STORY BODYS
 function getAuthor(story) {
-    return (_.escape(story.author_id));
+    return (_.escape(story.author_name));
 }
 function getGenre(story) {
     return (_.escape(story.genre));
@@ -38,22 +38,54 @@ function storiesHtml(stories) {
     return stories.map(getStory).join('');
 }
 
-// JQUERY STARTS
-
-$("#navCreate").click(function (event) {
-    event.preventDefault();
-    alertify.log('You\'ve clicked Create!')
-});
-
+// .CLICKS STARTS
 $("#navStories").click(function (event) {
     event.preventDefault();
-    alertify.log('You\'re looking at Stories!')
+    // alertify.log('You\'re looking at Stories!');
+    $('#about').attr('hidden', 'hidden');
+    $('#stories').removeAttr('hidden');
+    $('#new-story-form').attr('hidden', 'hidden');
+    // BELOW WILL MAKE THE ENTIRE ACTIVE NAVLINK GO AWAY
+    // $('li.nav-item.active').attr('hidden', 'hidden');
+    $('#navStoriesActive').removeAttr('hidden');
+    $('#navCreateActive').attr('hidden', 'hidden');
+    $('#navAboutActive').attr('hidden', 'hidden');
 });
 
 $("#navAbout").click(function (event) {
     event.preventDefault();
-    alertify.log('You\'re looking at About!')
+    // alertify.log('You\'re looking at About!');
+    $('#new-story-form').attr('hidden', 'hidden');
+    $('#stories').attr('hidden', 'hidden');
+    $('#about').removeAttr('hidden');
+    $('#navAboutActive').removeAttr('hidden');
+    $('#navCreateActive').attr('hidden', 'hidden');
+    $('#navStoriesActive').attr('hidden', 'hidden');
 });
+
+$('#navCreate').click(function (event) {
+    event.preventDefault();
+    // alertify.log('You\'ve clicked Create!');
+    $('#about').attr('hidden', 'hidden');
+    $('#stories').attr('hidden', 'hidden');
+    $('#new-story-form').removeAttr('hidden');
+    $('#navCreateActive').removeAttr('hidden');
+    $('#navStoriesActive').attr('hidden', 'hidden');
+    $('#navAboutActive').attr('hidden', 'hidden');
+    // $('#Inventory-List').html('');
+    // cart = '';
+    // cart =
+    //     '<button id="Back-Button-Cart" class="raise" onclick="draw()">Back</button><br><u><h3>Your Cart:</h3></u><br>';
+    // for (n = 0; n < CART.length; n++) {
+    //     cart += '<b><li>' + CART[n].name;
+    // }
+    // $('#Cart-List').html(
+    //     cart +
+    //     '<br><br><button id="checkout-button" class="raise" onclick="CheckOut()">Checkout!</button><br>'
+    // );
+});
+
+// .CLICKS ENDS
 
 function initializeExistingStoriesView(stories) {
     let storiesDiv = document.getElementById('existing-stories')
