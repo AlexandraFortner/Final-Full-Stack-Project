@@ -1,6 +1,6 @@
 package com.example.Backend.controllers;
 
-import java.util.List;
+import java.util.*;
 import com.example.Backend.core.Story;
 import com.example.Backend.db.Stories;
 import org.springframework.web.bind.annotation.*;

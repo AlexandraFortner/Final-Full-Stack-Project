@@ -2,14 +2,41 @@ var PAGE_DATA = {};
 
 API_URL = 'http://localhost:8080/';
 
+// VALIDATIONS BEGIN
+
 var validations = {
-    ItemName: false,
-    Seller: false,
-    Price: false,
-    PictureUrl: false,
-    HowMany: false
+    IsLoggedIn: false,
+    AuthorName: true,
+    Title: false,
+    StorySummary: false,
+    Story: false
 };
 
+// function maybeEnableButton() {
+//     if (
+//         validations.AuthorName === true &&
+//         validations. === true &&
+//         validations.repeatPass === true
+//     ) {
+//         $('.btn').attr('disabled', false);
+//     } else {
+//         $('.btn').attr('disabled', true);
+//     }
+// }
+
+
+function AuthorNameValidations() {
+    if (validations.AuthorName == false) {
+        console.log('The author name is false.');
+    } else if (validations.AuthorName == true) {
+        console.log('The author name is true.');
+        $('#signup-password-input').removeAttr('hidden');
+    } else {
+        console.log('ERROR.')
+    }
+}
+
+// VALIDATIONS END
 // SHOWING EXISTING STORY BODYS
 function getAuthor(story) {
     return (_.escape(story.author_name));
@@ -56,7 +83,7 @@ function getTitle(story) {
     return (_.escape(story.title) + '<hr>');
 }
 function getStory(story) {
-    return (_.escape(story.body)); // DON'T ACTUALLY ALLOW SPAMMY TABLES; ESCAPE post.body
+    return (_.escape(story.story)); // DON'T ACTUALLY ALLOW SPAMMY TABLES; ESCAPE post.body
 }
 function getStorySummary(story) {
     return (_.escape(story.story_summary) + '<hr>');
@@ -80,8 +107,8 @@ function storiesHtml(stories) {
 function storySummariesHtml(stories) {
     return stories.map(getStorySummary).join('');
 }
-
-// .CLICKS STARTS
+// STOPS DISPLAYING INFORMATION IN HTML
+// .CLICKS BEGIN ||| THE "DIFFERENT PAGES" BEGIN
 $("#navStories").click(function (event) {
     event.preventDefault();
     // alertify.log('You\'re looking at Stories!');
@@ -128,7 +155,8 @@ $('#navCreate').click(function (event) {
     // );
 });
 
-// .CLICKS ENDS
+
+// .CLICKS ENDS ||| THE "DIFFERENT PAGES" BEGIN
 
 function initializeExistingStoriesView(stories) {
     let storiesDiv = document.getElementById('existing-stories');
@@ -187,6 +215,17 @@ document.getElementById('new-story-form').onsubmit = event => {
     return false;
 }
 
-window.onload = () => fetch('http://localhost:8080/stories/')
-    .then(response => response.json())
-    .then(initializeExistingStoriesView);
+// SHOWSTORIES FUNCTION SHOWS ALL STORY DATA AS JSON AND DISPLAYS THEM VIA SPRING BACKEND: http://localhost:8080/stories
+function showStories() {
+    window.onload = () => fetch('http://localhost:8080/stories/')
+        .then(response => response.json())
+        .then(initializeExistingStoriesView);
+}
+
+function mainDraw() {
+    showStories();
+    form_validations();
+}
+
+
+mainDraw();

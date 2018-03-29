@@ -23,6 +23,5 @@ public class User {
         this.password_hash = password_hash;
         this.profile_picture = profile_picture;
         this.profile_summary = profile_summary;
-
     }
 }
