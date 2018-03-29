@@ -89,7 +89,7 @@
                         <small id="titleHelp" class="form-text text-muted">Enter title of story.</small>
                     </div>
                     <div id="story-summary-form" class="form-group">
-                        <label for="story-summary">Story Summary</label>
+                        <label for="storySummary">Story Summary</label>
                         <textarea class="form-control" id="storySummary" rows="3" aria-describedby="storySummaryHelp"></textarea>
                         <small id="storySummaryHelp" class="form-text text-muted">Enter story summary.</small>
                     </div>
@@ -98,7 +98,8 @@
                         <textarea class="form-control" id="story" rows="10" aria-describedby="storyHelp"></textarea>
                         <small id="storyHelp" class="form-text text-muted">Enter story.</small>
                     </div>
-                    <input type="submit" value="Publish!">
+                    <!-- <input type="submit" value="Publish!"> -->
+                    <button type="submit">Publish</button>
                 </form>
                 <div id="stories">
                     <h3>All Stories:</h3>
@@ -124,10 +125,20 @@
                 </div>
                 <div id="sign-up" hidden>
                     <div class="panel-body">
-                        <div class="col-lg-5 col-md-6 col-sm-8">
+                        <div class="col-lg-10 col-md-6 col-sm-8">
+                            <label for="username">Username:</label>
+                            <input type="text" id="username-input" name="username" class="form-control">
+                            <ul id="username-errors"></ul>
+                        </div>
+                        <div class="col-lg-10 col-md-6 col-sm-8">
                             <label for="password">Password:</label>
                             <input type="password" id="signup-password-input" name="password" class="form-control">
                             <ul id="password-errors"></ul>
+                        </div>
+                        <div class="col-lg-10 col-md-6 col-sm-8">
+                            <label for="repeat-password">Repeat Password:</label>
+                            <input type="repeat-password" id="repeat-password-input" name="repeat-password" class="form-control">
+                            <ul id="repeat-password-errors"></ul>
                         </div>
                     </div>
                 </div>

@@ -6,6 +6,11 @@ import java.sql.*;
 import lombok.*;
 
 public class Stories {
+    public Story story;
+
+    public Stories(Story story) {
+        this.story = story;
+    }
 
         private static Connection connect() {
             try {
@@ -27,7 +32,7 @@ public class Stories {
                 ResultSet rs = st.executeQuery();
                 ArrayList<Story> allstories = new ArrayList<Story>();
                 while (rs.next()) {
-                    String titles = rs.getString("story_title");
+//                    String titles = rs.getString("story_title");
                     allstories.add(new Story(
                             rs.getInt("id"),
                             rs.getString("story_author_name"),
@@ -50,13 +55,19 @@ public class Stories {
         }
     }
 
-            public static void create(String story_author_name, String story_title, String story_date, String story, Integer genre_id, Integer votes, String story_summary) {
+            public void create() {
                 try{
                     Connection c = connect();
                     PreparedStatement st = c.prepareStatement("insert into stories(story_author" +
-                            "_name, story_title, story_date, story, genre_id, votes, story_summary) values("  + story_author_name + "," +
-                            story_title + "," + story_date + "," + story + "," + genre_id + "," + votes + "," + story_summary +");");
-                    st.execute();
+                            "_name, story_title, story, genre_id, votes, story_summary) values(?, ?, ?, ?, ?, ?);");
+                    st.setString(1, this.story.author_name);
+                    st.setString(2, this.story.title);
+                    st.setString(3, this.story.story);
+                    st.setInt(4, this.story.genre_id);
+                    st.setInt(5, this.story.votes);
+                    st.setString(6, this.story.story_summary);
+                    System.out.println(st.executeUpdate());
+                    st.close();
                     }
                 catch (Exception e) {
                     e.printStackTrace();

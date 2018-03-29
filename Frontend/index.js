@@ -1,12 +1,13 @@
 var PAGE_DATA = {};
 
+
 API_URL = 'http://localhost:8080/';
 
 // VALIDATIONS BEGIN
 
 var validations = {
     IsLoggedIn: false,
-    AuthorName: true,
+    AuthorName: false,
     Title: false,
     StorySummary: false,
     Story: false
@@ -24,13 +25,23 @@ var validations = {
 //     }
 // }
 
+// function checkIfLoggedIn() {
+//     if (validations.IsLoggedIn == false) {
+//         $('#sign-up').removeAttr('hidden');
+//         $('#new-story-form').attr('hidden', 'hidden');
+//         $('#stories').attr('hidden', 'hidden');
+//         $('#about').attr('hidden', 'hidden');
+//     } else {
+//         $('#sign-up').attr('hidden', 'hidden');
+//     }
+// }
 
 function AuthorNameValidations() {
     if (validations.AuthorName == false) {
         console.log('The author name is false.');
     } else if (validations.AuthorName == true) {
         console.log('The author name is true.');
-        $('#signup-password-input').removeAttr('hidden');
+        // $('#sign-up').removeAttr('hidden');
     } else {
         console.log('ERROR.')
     }
@@ -172,25 +183,26 @@ function initializeExistingStoriesView(stories) {
 }
 
 function moveNewStoryToExistingStories() {
-    let form = document.getElementById('new-story-form')
-    let author = form.author.value;
-    let title = form.title.value;
-    let story = form.story.value;
-    let genre = form.genre.value;
-    let storySummary = form.storySummary.value;
-    let existingStoriesDiv = document.getElementById('existing-stories');
+    let author = $('author').val();
+    let title = $('title').val();
+    let story = $('story').val();
+    let genre = $('genre').val();
+    let storySummary = $('storySummary').val();
+    // let existingStoriesDiv = document.getElementById('existing-stories');
+    $("existing-stories").html("<li>" + story + "</li>")
     let newLi = document.createElement('li');
-    newLi.innerText = story;
-    existingStoriesDiv.appendChild(newLi);
-    form.author.value = '';
-    form.title.value = '';
-    form.story.value = '';
-    form.storySummary.value = '';
-    form.genre.value = '';
+    // newLi.innerText = story;
+    // existingStoriesDiv.appendChild(newLi);
+
+    // form.author.value = '';
+    // form.title.value = '';
+    // form.story.value = '';
+    // form.storySummary.value = '';
+    // form.genre.value = '';
 }
 
 function postToNewStoryRoute(author, title, story, storySummary, genre) {
-    fetch('http://localhost:8080/stories/new/', {
+    fetch('http://localhost:8080/stories', {
         method: 'POST',
         mode: 'cors',
         body: JSON.stringify({
@@ -200,19 +212,25 @@ function postToNewStoryRoute(author, title, story, storySummary, genre) {
             storySummary: storySummary,
             genre: genre
         })
-    }).then(moveNewPostToExistingStories)
+    }).then(moveNewStoryToExistingStories)
 }
+// $("new-story-form").onsubmit(function (event) {
+//     event.preventDefault();
 
+// })
 document.getElementById('new-story-form').onsubmit = event => {
+    event.preventDefault();
+    alertify.log('Submitted');
     let form = event.target;
     let author = form.author.value;
-    let story = form.story.value;
     let title = form.title.value;
-    let genre = form.genre.value;
+    let story = form.story.value;
     let storySummary = form.storySummary.value;
+    let genre = form.genre.value;
+
     // CHECK FOR VALID DATA
-    postToNewStoryRoute(author, title, story, genre, storySummary);
-    return false;
+    moveNewStoryToExistingStories();
+    // postToNewStoryRoute(author, title, story, genre, storySummary);
 }
 
 // SHOWSTORIES FUNCTION SHOWS ALL STORY DATA AS JSON AND DISPLAYS THEM VIA SPRING BACKEND: http://localhost:8080/stories
@@ -223,8 +241,9 @@ function showStories() {
 }
 
 function mainDraw() {
+    // checkIfLoggedIn();
     showStories();
-    form_validations();
+    // form_validations();
 }
 
 

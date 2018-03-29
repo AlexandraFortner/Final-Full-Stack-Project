@@ -12,7 +12,7 @@
         id serial unique primary key,
         story_author_name varchar(150) references users(username),
         story_title varchar(350),
-        story_date date,
+        story_date TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
         story text,
         genre_id int references genre (id),
         votes int,

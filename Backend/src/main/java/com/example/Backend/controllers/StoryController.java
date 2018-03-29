@@ -19,10 +19,10 @@ public class StoryController {
 //        return Stories.allGenres();
 //    }
 
-//    @CrossOrigin()
-//    @PostMapping("/newStory")
-//    public Story newStory(@RequestBody Story story) {
-//        Stories.create(story);
-//        return story;
-//    }
+    @CrossOrigin()
+    @PostMapping("/newStory")
+    public void newStory(@RequestBody Story story) {
+        Stories newStory = new Stories(story);
+        newStory.create();
+    }
 }

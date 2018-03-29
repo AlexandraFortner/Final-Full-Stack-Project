@@ -1,6 +1,6 @@
 package com.example.Backend.controllers;
 
 
-@RestController
+//@RestController
 public class UsersController {
 }
