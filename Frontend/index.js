@@ -25,41 +25,28 @@ var validations = {
 //     }
 // }
 
-// function checkIfLoggedIn() {
-//     if (validations.IsLoggedIn == false) {
+// function AuthorNameValidations() {
+//     if (validations.AuthorName == false) {
+//         console.log('The user is not logged in.');
+//     } else if (validations.AuthorName == true) {
+//         console.log('The user is logged in.');
 //         $('#sign-up').removeAttr('hidden');
-//         $('#new-story-form').attr('hidden', 'hidden');
-//         $('#stories').attr('hidden', 'hidden');
-//         $('#about').attr('hidden', 'hidden');
 //     } else {
-//         $('#sign-up').attr('hidden', 'hidden');
+//         console.log('ERROR.')
 //     }
 // }
 
-function AuthorNameValidations() {
-    if (validations.AuthorName == false) {
-        console.log('The user is not logged in.');
-    } else if (validations.AuthorName == true) {
-        console.log('The user is logged in.');
-        $('#sign-up').removeAttr('hidden');
-    } else {
-        console.log('ERROR.')
-    }
-}
-
 function isLoggedIn() {
     if (validations.IsLoggedIn == false) {
-        console.log('The author name is false.');
+        console.log('The user is not logged in.');
         $('#new-story-form').attr('hidden', 'hidden');
         $('#stories').attr('hidden', 'hidden');
         $('#about').attr('hidden', 'hidden');
         $('#navbar').attr('hidden', 'hidden');
         $('#sign-up').removeAttr('hidden');
     } else if (validations.IsLoggedIn == true) {
-        console.log('The author name is true.');
-        $('#new-story-form').removeAttr('hidden');
+        console.log('The user is logged in.');
         $('#stories').removeAttr('hidden');
-        $('#about').removeAttr('hidden');
         $('#navbar').removeAttr('hidden');
         $('#sign-up').attr('hidden', 'hidden');
     } else {
