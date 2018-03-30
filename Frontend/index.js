@@ -58,43 +58,43 @@ function isLoggedIn() {
 function getAuthor(story) {
     return (_.escape(story.author_name));
 }
-function getGenre(story) {
-    if (story.genre_id == 1) {
+function getGenre(genre) {
+    if (genre == 1) {
         newGenre = 'Horror'
-    } else if (story.genre_id == 2) {
+    } else if (genre == 2) {
         newGenre = 'Action-Adventure'
-    } else if (story.genre_id == 3) {
+    } else if (genre == 3) {
         newGenre = 'Romance'
-    } else if (story.genre_id == 4) {
+    } else if (genre == 4) {
         newGenre = 'Thriller'
-    } else if (story.genre_id == 5) {
+    } else if (genre == 5) {
         newGenre = 'Comedy'
-    } else if (story.genre_id == 6) {
+    } else if (genre == 6) {
         newGenre = 'Historical Fiction'
-    } else if (story.genre_id == 7) {
+    } else if (genre == 7) {
         newGenre = 'Fanfiction'
-    } else if (story.genre_id == 8) {
+    } else if (genre == 8) {
         newGenre = 'Fantasy'
-    } else if (story.genre_id == 9) {
+    } else if (genre == 9) {
         newGenre = 'Non-Fiction'
-    } else if (story.genre_id == 10) {
+    } else if (genre == 10) {
         newGenre = 'Science Fiction'
-    } else if (story.genre_id == 11) {
+    } else if (genre == 11) {
         newGenre = 'Short Story'
-    } else if (story.genre_id == 12) {
+    } else if (genre == 12) {
         newGenre = 'Poetry'
-    } else if (story.genre_id == 13) {
+    } else if (genre == 13) {
         newGenre = 'Spiritual'
-    } else if (story.genre_id == 14) {
+    } else if (genre == 14) {
         newGenre = 'Paranormal'
-    } else if (story.genre_id == 15) {
+    } else if (genre == 15) {
         newGenre = 'Teen Fiction'
-    } else if (story.genre_id == 16) {
+    } else if (genre == 16) {
         newGenre = 'Random'
     } else {
         newGenre = null
     }
-    return (_.escape(newGenre)) + '<hr>';
+    return (newGenre)
 }
 function getTitle(story) {
     return (_.escape(story.title) + '<hr>');
@@ -123,6 +123,24 @@ function storiesHtml(stories) {
 }
 function storySummariesHtml(stories) {
     return stories.map(getStorySummary).join('');
+}
+function story(stories) {
+    var storyStructure = stories.map(function (story) {
+        return [
+            "<div id='all-stories' class='card text-white bg-dark mb-3' style='max-width: 30rem;'>",
+            "<div class='card-body'>",
+            "<div>" + story.id + "</div>",
+            "<div class='card-header'>" + story.author_name + "</div>",
+            "<div class='card-title'>" + story.title + "</div>",
+            "<div class='card-title'>" + story.date + "</div>",
+            "<div class='card-text'>" + story.story + "</div>",
+            "<div class='card-title'>" + getGenre(story.genre_id) + "</div>",
+            "<div class='card-title'>" + story.votes + "</div>",
+            "<div class='card-title'>" + story.story_summary + "</div>",
+            "</div></div>"
+        ].join("")
+    }).join("");
+    return "<h3>All Stories:</h3>" + storyStructure;
 }
 // STOPS DISPLAYING INFORMATION IN HTML
 // .CLICKS BEGIN ||| THE "DIFFERENT PAGES" BEGIN
@@ -176,16 +194,17 @@ $('#navCreate').click(function (event) {
 // .CLICKS ENDS ||| THE "DIFFERENT PAGES" BEGIN
 
 function initializeExistingStoriesView(stories) {
-    let storiesDiv = document.getElementById('existing-stories');
-    let titlesDiv = document.getElementById('existing-titles');
-    let authorsDiv = document.getElementById('existing-authors');
-    let genresDiv = document.getElementById('existing-genres');
-    let storySummaryDiv = document.getElementById('existing-story-summaries');
-    storiesDiv.innerHTML = storiesHtml(stories);
-    titlesDiv.innerHTML = titlesHtml(stories);
-    authorsDiv.innerHTML = authorsHtml(stories);
-    genresDiv.innerHTML = genresHtml(stories);
-    storySummaryDiv.innerHTML = storySummariesHtml(stories);
+    // let storiesDiv = document.getElementById('existing-stories');
+    // let titlesDiv = document.getElementById('existing-titles');
+    // let authorsDiv = document.getElementById('existing-authors');
+    // let genresDiv = document.getElementById('existing-genres');
+    // let storySummaryDiv = document.getElementById('existing-story-summaries');
+    // storiesDiv.innerHTML = storiesHtml(stories);
+    // titlesDiv.innerHTML = titlesHtml(stories);
+    // authorsDiv.innerHTML = authorsHtml(stories);
+    // genresDiv.innerHTML = genresHtml(stories);
+    // storySummaryDiv.innerHTML = storySummariesHtml(stories);
+    $("#stories").html(story(stories));
 }
 
 function moveNewStoryToExistingStories() {
