@@ -6,7 +6,7 @@ API_URL = 'http://localhost:8080/';
 // VALIDATIONS BEGIN
 
 var validations = {
-    IsLoggedIn: false,
+    IsLoggedIn: true,
     AuthorName: false,
     Title: false,
     StorySummary: false,
@@ -38,15 +38,34 @@ var validations = {
 
 function AuthorNameValidations() {
     if (validations.AuthorName == false) {
-        console.log('The author name is false.');
+        console.log('The user is not logged in.');
     } else if (validations.AuthorName == true) {
-        console.log('The author name is true.');
-        // $('#sign-up').removeAttr('hidden');
+        console.log('The user is logged in.');
+        $('#sign-up').removeAttr('hidden');
     } else {
         console.log('ERROR.')
     }
 }
 
+function isLoggedIn() {
+    if (validations.IsLoggedIn == false) {
+        console.log('The author name is false.');
+        $('#new-story-form').attr('hidden', 'hidden');
+        $('#stories').attr('hidden', 'hidden');
+        $('#about').attr('hidden', 'hidden');
+        $('#navbar').attr('hidden', 'hidden');
+        $('#sign-up').removeAttr('hidden');
+    } else if (validations.IsLoggedIn == true) {
+        console.log('The author name is true.');
+        $('#new-story-form').removeAttr('hidden');
+        $('#stories').removeAttr('hidden');
+        $('#about').removeAttr('hidden');
+        $('#navbar').removeAttr('hidden');
+        $('#sign-up').attr('hidden', 'hidden');
+    } else {
+        console.log('ERROR.')
+    }
+}
 // VALIDATIONS END
 // SHOWING EXISTING STORY BODYS
 function getAuthor(story) {
@@ -242,6 +261,7 @@ function showStories() {
 
 function mainDraw() {
     // checkIfLoggedIn();
+    isLoggedIn();
     showStories();
     // form_validations();
 }
