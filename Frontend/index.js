@@ -54,10 +54,7 @@ function isLoggedIn() {
     }
 }
 // VALIDATIONS END
-// SHOWING EXISTING STORY BODYS
-function getAuthor(story) {
-    return (_.escape(story.author_name));
-}
+// SHOWING EXISTING STORY BODYS IN SEPERATE CARDS
 function getGenre(genre) {
     if (genre == 1) {
         newGenre = 'Horror'
@@ -96,46 +93,21 @@ function getGenre(genre) {
     }
     return (newGenre)
 }
-function getTitle(story) {
-    return (_.escape(story.title) + '<hr>');
-}
-function getStory(story) {
-    return (_.escape(story.story)); // DON'T ACTUALLY ALLOW SPAMMY TABLES; ESCAPE post.body
-}
-function getStorySummary(story) {
-    return (_.escape(story.story_summary) + '<hr>');
-    // PARAMETERS ARE READ IN FROM STORY.JAVA 
-    // DON'T ACTUALLY ALLOW SPAMMY TABLES; ESCAPE post.body
-}
+function heartVote() {
 
-// DISPLAYS INFORMATION IN HTML
-function authorsHtml(stories) {
-    return stories.map(getAuthor).join('');
-}
-function genresHtml(stories) {
-    return stories.map(getGenre).join('');
-}
-function titlesHtml(stories) {
-    return stories.map(getTitle).join('');
-}
-function storiesHtml(stories) {
-    return stories.map(getStory).join('');
-}
-function storySummariesHtml(stories) {
-    return stories.map(getStorySummary).join('');
 }
 function story(stories) {
     var storyStructure = stories.map(function (story) {
         return [
             "<div id='all-stories' class='card text-white bg-dark mb-3' style='max-width: 30rem;'>",
             "<div class='card-body'>",
-            "<div>" + story.id + "</div>",
+            // "<div>" + story.id + "</div>",
             "<div class='card-header'>" + story.author_name + "</div>",
             "<div class='card-title'>" + story.title + "</div>",
             "<div class='card-title'>" + story.date + "</div>",
             "<div class='card-text'>" + story.story + "</div>",
             "<div class='card-title'>" + getGenre(story.genre_id) + "</div>",
-            "<div class='card-title'>" + story.votes + "</div>",
+            "<div class='card-title'><i id='clear-heart' class='far fa-heart'></i>&nbsp;" + story.votes + "</div>",
             "<div class='card-title'>" + story.story_summary + "</div>",
             "</div></div>"
         ].join("")
@@ -271,6 +243,4 @@ function mainDraw() {
     showStories();
     // form_validations();
 }
-
-
 mainDraw();
