@@ -19,10 +19,10 @@
         story_summary text
     );
 
---    create table if not exists genre(
---    id serial unique primary key,
---    genre_name varchar(200)
---    );
+    create table if not exists genre(
+    id serial unique primary key,
+    genre_name varchar(200)
+    );
 
 --    ALTER TABLE stories
 --    ADD COLUMN story_summary text;

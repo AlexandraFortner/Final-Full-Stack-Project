@@ -13,17 +13,17 @@ var validations = {
     Story: false
 };
 
-// function maybeEnableButton() {
-//     if (
-//         validations.AuthorName === true &&
-//         validations. === true &&
-//         validations.repeatPass === true
-//     ) {
-//         $('.btn').attr('disabled', false);
-//     } else {
-//         $('.btn').attr('disabled', true);
-//     }
-// }
+function maybeEnableButton() {
+    if (
+        validations.AuthorName === true &&
+        validations.password === true &&
+        validations.repeatPass === true
+    ) {
+        $('#SignUpButton').attr('disabled', false);
+    } else {
+        $('#SignUpButton').attr('disabled', true);
+    }
+}
 
 // function AuthorNameValidations() {
 //     if (validations.AuthorName == false) {
@@ -151,17 +151,6 @@ $('#navCreate').click(function (event) {
     $('#navCreateActive').removeAttr('hidden');
     $('#navStoriesActive').attr('hidden', 'hidden');
     $('#navAboutActive').attr('hidden', 'hidden');
-    // $('#Inventory-List').html('');
-    // cart = '';
-    // cart =
-    //     '<button id="Back-Button-Cart" class="raise" onclick="draw()">Back</button><br><u><h3>Your Cart:</h3></u><br>';
-    // for (n = 0; n < CART.length; n++) {
-    //     cart += '<b><li>' + CART[n].name;
-    // }
-    // $('#Cart-List').html(
-    //     cart +
-    //     '<br><br><button id="checkout-button" class="raise" onclick="CheckOut()">Checkout!</button><br>'
-    // );
 });
 
 
