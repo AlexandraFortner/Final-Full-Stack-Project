@@ -93,9 +93,11 @@ function getGenre(genre) {
     }
     return (newGenre)
 }
-function heartVote() {
 
-}
+// I PLAN TO WRITE THE BELOW FUNCTION LATER ON
+// function heartVote() {
+
+// }
 function story(stories) {
     var storyStructure = stories.map(function (story) {
         return [
