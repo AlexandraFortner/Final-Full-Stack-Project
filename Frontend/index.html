@@ -102,14 +102,6 @@
                     <button type="submit">Publish</button>
                 </form>
                 <div id="stories">
-                    <!-- <h3>All Stories:</h3> -->
-                    <!-- <div id="existing-authors" class="card-header"></div>
-                        <div class="card-body">
-                            <h4 id="existing-titles" class="card-title"></h4>
-                            <h4 id="existing-genres" class="card-title"></h4>
-                            <h5 id="existing-story-summaries" class="card-title"></h5>
-                            <p id="existing-stories" class="card-text"></p>
-                        </div> -->
                 </div>
                 <div id="about" hidden>
                     Creator Name: Alexandra Fortner
@@ -125,7 +117,7 @@
                     <div class="panel-body">
                         <div class="col-lg-10 col-md-6 col-sm-8">
                             <label for="username">Username:</label>
-                            <input type="text" id="username-input" name="username" class="form-control">
+                            <input type="text" id="signup-username-input" name="username" class="form-control">
                             <ul id="username-errors"></ul>
                         </div>
                         <div class="col-lg-10 col-md-6 col-sm-8">
@@ -135,18 +127,60 @@
                         </div>
                         <div class="col-lg-10 col-md-6 col-sm-8">
                             <label for="repeat-password">Repeat Password:</label>
-                            <input type="repeat-password" id="repeat-password-input" name="repeat-password" class="form-control">
+                            <input type="repeat-password" id="signup-repeat-password-input" name="repeat-password" class="form-control">
                             <ul id="repeat-password-errors"></ul>
+                        </div>
+                        <div class="col-lg-10 col-md-6 col-sm-8" style="right: -64%;">
+                            <button type="submit">Submit</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <script src="https://unpkg.com/underscore"></script>
-            <script src="vendor/alertify.js-0.3.11/src/alertify.js"></script>
-            <script src="vendor/jquery.js"></script>
-            <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-            <script src="vendor/bootstrap-4.0.0-dist/js/bootstrap.js"></script>
-            <script src="index.js"></script>
+            <div id="all-genres" class="sidebar">
+                <div class="block">
+                    <h2>All Genres:</h2>
+                    <ul>
+                        <li>
+                            <a title="" href="#">Black &amp; white</a> (4)</li>
+                        <li>
+                            <a title="" href="#">Fantasies</a> (3)</li>
+                        <li>
+                            <a title="" href="#">Music</a> (3)</li>
+                        <li>
+                            <a title="" href="#">Nature</a> (3)</li>
+                        <li>
+                            <a title="" href="#">Portraits</a> (2)</li>
+                        <li>
+                            <a title="" href="#">Urban</a> (2)</li>
+                    </ul>
+                </div>
+                <div class="block">
+                    <h2>All Users:</h2>
+                    <ul>
+                        <li>
+                            <a title="" href="#">July 2011</a> (5)</li>
+                        <li>
+                            <a title="" href="#">June 2011</a> (5)</li>
+                        <li>
+                            <a title="" href="#">May 2011</a> (5)</li>
+                        <li>
+                            <a title="" href="#">April 2011</a> (5)</li>
+                        <li>
+                            <a title="" href="#">March 2011</a> (5)</li>
+                        <li>
+                            <a title="" href="#">February 2011</a> (5)</li>
+                        <li>
+                            <a title="" href="#">January 2011</a> (5)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="https://unpkg.com/underscore"></script>
+        <script src="vendor/alertify.js-0.3.11/src/alertify.js"></script>
+        <script src="vendor/jquery.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+        <script src="vendor/bootstrap-4.0.0-dist/js/bootstrap.js"></script>
+        <script src="index.js"></script>
     </body>
 </section>
 

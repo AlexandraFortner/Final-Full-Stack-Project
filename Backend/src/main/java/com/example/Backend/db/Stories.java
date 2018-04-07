@@ -1,9 +1,10 @@
 package com.example.Backend.db;
 
 import java.util.*;
+
 import com.example.Backend.core.Story;
+import com.example.Backend.db.Connect;
 import java.sql.*;
-import lombok.*;
 
 public class Stories {
     public Story story;
@@ -12,22 +13,9 @@ public class Stories {
         this.story = story;
     }
 
-        private static Connection connect() {
-            try {
-                return DriverManager.getConnection(
-                    "jdbc:postgresql:NovaDatabase", "basecamp", "pgpass");
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-                System.err.println(e.getClass().getName()+": "+e.getMessage());
-                System.exit(0);
-                return null;
-            }
-        }
-
         public static List<Story> all() {
             try{
-                Connection c = connect();
+                Connection c = Connect.connect();
                 PreparedStatement st = c.prepareStatement("SELECT * FROM stories;");
                 ResultSet rs = st.executeQuery();
                 ArrayList<Story> allstories = new ArrayList<Story>();
@@ -57,7 +45,7 @@ public class Stories {
 
             public void create() {
                 try{
-                    Connection c = connect();
+                    Connection c = Connect.connect();
                     PreparedStatement st = c.prepareStatement("insert into stories(story_author" +
                             "_name, story_title, story, genre_id, votes, story_summary) values(?, ?, ?, ?, ?, ?);");
                     st.setString(1, this.story.author_name);

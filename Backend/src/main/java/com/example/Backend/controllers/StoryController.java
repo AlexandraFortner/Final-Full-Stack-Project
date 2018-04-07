@@ -1,10 +1,8 @@
 package com.example.Backend.controllers;
 
 import java.util.*;
-import com.example.Backend.core.Story;
-import com.example.Backend.db.Stories;
-import com.example.Backend.core.Genre;
-import com.example.Backend.db.Genres;
+import com.example.Backend.db.*;
+import com.example.Backend.core.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

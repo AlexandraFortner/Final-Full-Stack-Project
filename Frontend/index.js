@@ -188,6 +188,36 @@ function moveNewStoryToExistingStories() {
     // form.storySummary.value = '';
     // form.genre.value = '';
 }
+// HELPED
+function registerSignUpHandler() {
+    $('#sign-up').on('submit', function (event) {
+        event.preventDefault();
+        console.log(
+            JSON.stringify({
+                // IntelliJ (adoptername): Html form id(#adopterName-input')
+                username: $('#signup-username-input').val(),
+                password: $('#signup-password-input').val(),
+                repeated_password: $('#signup-repeat-password-input').val()
+            })
+        );
+        $.ajax({
+            url: 'http://localhost:8080/SignUp/',
+            method: 'POST',
+            dataType: 'json',
+            crossDomain: true,
+            data: JSON.stringify({
+                username: $('#signup-username-input').val(),
+                password: $('#signup-password-input').val(),
+                repeated_password: $('#signup-repeat-password-input').val()
+            }),
+            contentType: 'application/json',
+            mimeType: 'application/json',
+            error: function (data, status, er) {
+                alert('status: ' + status);
+            }
+        });
+    });
+}
 
 function postToNewStoryRoute(author, title, story, storySummary, genre) {
     fetch('http://localhost:8080/stories', {
