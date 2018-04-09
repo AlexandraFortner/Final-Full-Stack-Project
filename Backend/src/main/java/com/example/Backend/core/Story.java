@@ -8,7 +8,6 @@ public class Story {
     public Date date;
     public String story;
     public Integer genre_id;
-    public Integer votes;
     public String story_summary;
 
     public Story() {}
@@ -19,7 +18,6 @@ public class Story {
                  Date date,
                  String story,
                  Integer genre_id,
-                 Integer votes,
                  String story_summary) {
         this.id = id;
         this.author_name = author_name;
@@ -27,7 +25,6 @@ public class Story {
         this.date = date;
         this.story = story;
         this.genre_id = genre_id;
-        this.votes = votes;
         this.story_summary = story_summary;
     }
 }

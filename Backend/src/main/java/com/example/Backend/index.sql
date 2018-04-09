@@ -15,7 +15,6 @@
         story_date TIMESTAMP WITHOUT TIME ZONE DEFAULT CURRENT_TIMESTAMP,
         story text,
         genre_id int references genre (id),
-        votes int,
         story_summary text
     );
 

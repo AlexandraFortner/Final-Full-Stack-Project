@@ -28,7 +28,6 @@ public class Stories {
                             rs.getDate("story_date"),
                             rs.getString("story"),
                             rs.getInt("genre_id"),
-                            rs.getInt("votes"),
                             rs.getString("story_summary")
                     ));
                     // ABOVE PARENTHESES() GETS SQL COLUMN NAMES
@@ -47,12 +46,11 @@ public class Stories {
                 try{
                     Connection c = Connect.connect();
                     PreparedStatement st = c.prepareStatement("insert into stories(story_author" +
-                            "_name, story_title, story, genre_id, votes, story_summary) values(?, ?, ?, ?, ?, ?);");
+                            "_name, story_title, story, genre_id, story_summary) values(?, ?, ?, ?, ?);");
                     st.setString(1, this.story.author_name);
                     st.setString(2, this.story.title);
                     st.setString(3, this.story.story);
                     st.setInt(4, this.story.genre_id);
-                    st.setInt(5, this.story.votes);
                     st.setString(6, this.story.story_summary);
                     System.out.println(st.executeUpdate());
                     st.close();
