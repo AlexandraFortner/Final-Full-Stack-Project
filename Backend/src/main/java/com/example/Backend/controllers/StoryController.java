@@ -3,6 +3,7 @@ package com.example.Backend.controllers;
 import java.util.*;
 import com.example.Backend.db.*;
 import com.example.Backend.core.*;
+import com.example.Backend.dto.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,8 +22,7 @@ public class StoryController {
 
     @CrossOrigin()
     @PostMapping("/newStory")
-    public void newStory(@RequestBody Story story) {
-        Stories newStory = new Stories(story);
-        newStory.create();
+    public Story newStory(@RequestBody NewStory story) {
+        return Stories.create(story);
     }
 }

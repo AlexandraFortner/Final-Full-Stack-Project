@@ -12,11 +12,13 @@ import java.util.*;
 @RestController
 public class SignUpController {
     //    SETTING UP THE INITIAL SALT
+
     @Value("${app.salt}")
     private String salt;
+
 //____________________________________________________________________________________________
     @CrossOrigin()
-    @PostMapping("/SignUp/")
+    @PostMapping("/signup/")
     public User signUp(@RequestBody User newPerson) {
 
         String hashedPassword = BCrypt.hashpw(newPerson.password_hash, salt);

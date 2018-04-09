@@ -4,13 +4,10 @@ import java.util.*;
 
 import com.example.Backend.core.Story;
 import com.example.Backend.db.Connect;
+import com.example.Backend.dto.NewStory;
 import java.sql.*;
 
-    public Story story;
 
-    public Stories(Story story) {
-        this.story = story;
-    }
 
 public class Stories {
     public static List<Story> all() {
@@ -41,26 +38,39 @@ public class Stories {
         }
     }
 
-            public void create() {
-                try{
-                    Connection c = Connect.connect();
-                    PreparedStatement st = c.prepareStatement("insert into stories(story_author" +
-                            "_name, story_title, story, genre_id, story_summary) values(?, ?, ?, ?, ?);");
-                    st.setString(1, this.story.author_name);
-                    st.setString(2, this.story.title);
-                    st.setString(3, this.story.story);
-                    st.setInt(4, this.story.genre_id);
-                    st.setString(6, this.story.story_summary);
-                    System.out.println(st.executeUpdate());
-                    st.close();
-                    }
-                catch (Exception e) {
-                    e.printStackTrace();
-                    System.err.println(e.getClass().getName()+": "+e.getMessage());
-                    System.exit(0);
-                }
+    public static Story create(NewStory newStory) {
+        try{
+            Connection c = Connect.connect();
+            PreparedStatement st = c.prepareStatement("insert into stories(story_author" +
+                    "_name, story_title, story, genre_id, story_summary) values(?, ?, ?, ?, ?) RETURNING id, story_date;");
+            st.setString(1, newStory.author_name);
+            st.setString(2, newStory.title);
+            st.setString(3, newStory.story);
+            st.setInt(4, newStory.genre_id);
+            st.setString(5, newStory.story_summary);
+            ResultSet rs = st.executeQuery();
+            rs.next();
+            Story s = new Story(
+                    rs.getInt("id"),
+                    newStory.author_name,
+                    newStory.title,
+                    rs.getDate("story_date"),
+                    newStory.story,
+                    newStory.genre_id,
+                    newStory.story_summary
+            );
+            st.close();
+            c.close();
+            return s;
+            }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName()+": "+e.getMessage());
+            System.exit(0);
+            return null;
         }
-//        public static void List<Story> allGenres() {
+    }
+    //        public static void List<Story> allGenres() {
             // connect
             // SELECT * FROM genre;
             // return fetchall();

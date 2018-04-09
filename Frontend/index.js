@@ -103,7 +103,6 @@ function story(stories) {
         return [
             "<div id='all-stories' class='card text-white bg-dark mb-3' style='max-width: 30rem;'>",
             "<div class='card-body'>",
-            // "<div>" + story.id + "</div>",
             "<div class='card-header'>" + story.author_name + "</div>",
             "<div class='card-title'>" + story.title + "</div>",
             "<div class='card-title'>" + getGenre(story.genre_id) + "</div>",
@@ -154,16 +153,6 @@ $('#navCreate').click(function (event) {
 // .CLICKS ENDS ||| THE "DIFFERENT PAGES" BEGIN
 
 function initializeExistingStoriesView(stories) {
-    // let storiesDiv = document.getElementById('existing-stories');
-    // let titlesDiv = document.getElementById('existing-titles');
-    // let authorsDiv = document.getElementById('existing-authors');
-    // let genresDiv = document.getElementById('existing-genres');
-    // let storySummaryDiv = document.getElementById('existing-story-summaries');
-    // storiesDiv.innerHTML = storiesHtml(stories);
-    // titlesDiv.innerHTML = titlesHtml(stories);
-    // authorsDiv.innerHTML = authorsHtml(stories);
-    // genresDiv.innerHTML = genresHtml(stories);
-    // storySummaryDiv.innerHTML = storySummariesHtml(stories);
     $("#stories").html(story(stories));
 }
 
@@ -178,12 +167,6 @@ function moveNewStoryToExistingStories() {
     let newLi = document.createElement('li');
     // newLi.innerText = story;
     // existingStoriesDiv.appendChild(newLi);
-
-    // form.author.value = '';
-    // form.title.value = '';
-    // form.story.value = '';
-    // form.storySummary.value = '';
-    // form.genre.value = '';
 }
 // HELPED
 function registerSignUpHandler() {
@@ -194,18 +177,16 @@ function registerSignUpHandler() {
                 // IntelliJ (adoptername): Html form id(#adopterName-input')
                 username: $('#signup-username-input').val(),
                 password: $('#signup-password-input').val(),
-                repeated_password: $('#signup-repeat-password-input').val()
             })
         );
         $.ajax({
-            url: 'http://localhost:8080/SignUp/',
+            url: 'http://localhost:8080/signup/',
             method: 'POST',
             dataType: 'json',
             crossDomain: true,
             data: JSON.stringify({
                 username: $('#signup-username-input').val(),
                 password: $('#signup-password-input').val(),
-                repeated_password: $('#signup-repeat-password-input').val()
             }),
             contentType: 'application/json',
             mimeType: 'application/json',
@@ -216,23 +197,25 @@ function registerSignUpHandler() {
     });
 }
 
-function postToNewStoryRoute(author, title, story, storySummary, genre) {
-    fetch('http://localhost:8080/stories', {
-        method: 'POST',
+function postToNewStoryRoute(author, title, story, genre, storySummary) {
+    let story_dto = {
+        author_name: author,
+        title: title,
+        story: story,
+        story_summary: storySummary,
+        genre_id: Number(genre)
+    };
+    console.log(story_dto);
+    fetch('http://localhost:8080/newStory', {
+        method: 'post',
+        headers: {
+            "Content-Type": 'application/json'
+        },
         mode: 'cors',
-        body: JSON.stringify({
-            author: author,
-            title: title,
-            story: story,
-            storySummary: storySummary,
-            genre: genre
-        })
+        body: JSON.stringify(story_dto)
     }).then(moveNewStoryToExistingStories)
 }
-// $("new-story-form").onsubmit(function (event) {
-//     event.preventDefault();
 
-// })
 document.getElementById('new-story-form').onsubmit = event => {
     event.preventDefault();
     alertify.log('Submitted');
@@ -244,8 +227,7 @@ document.getElementById('new-story-form').onsubmit = event => {
     let genre = form.genre.value;
 
     // CHECK FOR VALID DATA
-    moveNewStoryToExistingStories();
-    // postToNewStoryRoute(author, title, story, genre, storySummary);
+    postToNewStoryRoute(author, title, story, genre, storySummary);
 }
 
 // SHOWSTORIES FUNCTION SHOWS ALL STORY DATA AS JSON AND DISPLAYS THEM VIA SPRING BACKEND: http://localhost:8080/stories
