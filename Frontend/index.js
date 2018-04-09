@@ -6,7 +6,7 @@ API_URL = 'http://localhost:8080/';
 // VALIDATIONS BEGIN
 
 var validations = {
-    IsLoggedIn: true,
+    IsLoggedIn: false,
     AuthorName: false,
     Title: false,
     StorySummary: false,
@@ -43,12 +43,14 @@ function isLoggedIn() {
         $('#stories').attr('hidden', 'hidden');
         $('#about').attr('hidden', 'hidden');
         $('#navbar').attr('hidden', 'hidden');
-        $('#sign-up').removeAttr('hidden');
+        // $('#sign-up').removeAttr('hidden');
+        $('#log-in').removeAttr('hidden');
     } else if (validations.IsLoggedIn == true) {
         console.log('The user is logged in.');
         $('#stories').removeAttr('hidden');
         $('#navbar').removeAttr('hidden');
         $('#sign-up').attr('hidden', 'hidden');
+        $('#log-in').attr('hidden', 'hidden');
     } else {
         console.log('ERROR.')
     }
@@ -116,6 +118,8 @@ function story(stories) {
 }
 // STOPS DISPLAYING INFORMATION IN HTML
 // .CLICKS BEGIN ||| THE "DIFFERENT PAGES" BEGIN
+
+// NAVBAR .CLICKS
 $("#navStories").click(function (event) {
     event.preventDefault();
     // alertify.log('You\'re looking at Stories!');
@@ -149,6 +153,18 @@ $('#navCreate').click(function (event) {
     $('#navAboutActive').attr('hidden', 'hidden');
 });
 
+// OTHER .CLICKS
+$('#sign-up-button').click(function (event) {
+    event.preventDefault();
+    $('#sign-up').removeAttr('hidden');
+    $('#log-in').attr('hidden', 'hidden');
+});
+
+$('#log-in-button').click(function (event) {
+    event.preventDefault();
+    $('#sign-up').attr('hidden', 'hidden');
+    $('#log-in').removeAttr('hidden');
+});
 
 // .CLICKS ENDS ||| THE "DIFFERENT PAGES" BEGIN
 

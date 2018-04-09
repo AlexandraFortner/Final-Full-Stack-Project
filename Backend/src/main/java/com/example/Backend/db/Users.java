@@ -12,7 +12,7 @@ public class Users {
             PreparedStatement preparedStatement = conn.prepareStatement(
                     "INSERT INTO users(" +
                             "username, password_hash) " +
-                            "VALUES (?,?)");
+                            "VALUES (?,?) returning *;");
             preparedStatement.setString(1,username);
             preparedStatement.setString(2,password_hash);
 

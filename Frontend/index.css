@@ -115,13 +115,13 @@ body, html {
     height:100%;
 }
 
-#movingImages {
+/* #movingImages {
     position:relative;
     height:281px;
     width:450px;
     margin:0 auto;
   }
-  
+   */
 /* #movingImages img {
     position:absolute;
     left:0;
@@ -154,8 +154,21 @@ body, html {
       animation-direction: alternate;
 } */
 
+.signup-login-button {
+    background:none!important;
+     border:none; 
+     padding:0!important;
+    
+    /*optional*/
+     color:#562166;
+     text-decoration:underline;
+     cursor:pointer;
+}
+
+
 h1, h2, h3 {
-    color: black;
+	color: #310050;
+	text-decoration: underline overline #764f8c;
 }
 
 .panel-default {    
