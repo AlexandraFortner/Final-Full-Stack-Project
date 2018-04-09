@@ -153,13 +153,15 @@ $('#navCreate').click(function (event) {
     $('#navAboutActive').attr('hidden', 'hidden');
 });
 
-// OTHER .CLICKS
+// SIGNUP .CLICKS
 $('#sign-up-button').click(function (event) {
     event.preventDefault();
     $('#sign-up').removeAttr('hidden');
     $('#log-in').attr('hidden', 'hidden');
 });
 
+
+// LOGIN .CLICKS
 $('#log-in-button').click(function (event) {
     event.preventDefault();
     $('#sign-up').attr('hidden', 'hidden');
@@ -197,7 +199,7 @@ function registerSignUpHandler() {
         );
         $.ajax({
             url: 'http://localhost:8080/signup/',
-            method: 'POST',
+            method: 'post',
             dataType: 'json',
             crossDomain: true,
             data: JSON.stringify({
@@ -221,7 +223,6 @@ function postToNewStoryRoute(author, title, story, genre, storySummary) {
         story_summary: storySummary,
         genre_id: Number(genre)
     };
-    console.log(story_dto);
     fetch('http://localhost:8080/newStory', {
         method: 'post',
         headers: {
@@ -254,6 +255,7 @@ function showStories() {
 }
 
 function mainDraw() {
+    registerSignUpHandler();
     // checkIfLoggedIn();
     isLoggedIn();
     showStories();
