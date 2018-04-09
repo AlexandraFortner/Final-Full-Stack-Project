@@ -106,11 +106,10 @@ function story(stories) {
             // "<div>" + story.id + "</div>",
             "<div class='card-header'>" + story.author_name + "</div>",
             "<div class='card-title'>" + story.title + "</div>",
-            "<div class='card-title'>" + story.date + "</div>",
-            "<div class='card-text'>" + story.story + "</div>",
             "<div class='card-title'>" + getGenre(story.genre_id) + "</div>",
-            "<div class='card-title'><i id='clear-heart' class='far fa-heart'></i>&nbsp;" + story.votes + "</div>",
+            "<div class='card-title'>" + story.date + "</div>",
             "<div class='card-title'>" + story.story_summary + "</div>",
+            "<div class='card-text'>" + story.story + "</div>",
             "</div></div>"
         ].join("")
     }).join("");
@@ -124,8 +123,6 @@ $("#navStories").click(function (event) {
     $('#about').attr('hidden', 'hidden');
     $('#stories').removeAttr('hidden');
     $('#new-story-form').attr('hidden', 'hidden');
-    // BELOW WILL MAKE THE ENTIRE ACTIVE NAVLINK GO AWAY
-    // $('li.nav-item.active').attr('hidden', 'hidden');
     $('#navStoriesActive').removeAttr('hidden');
     $('#navCreateActive').attr('hidden', 'hidden');
     $('#navAboutActive').attr('hidden', 'hidden');

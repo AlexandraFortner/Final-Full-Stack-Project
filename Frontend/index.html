@@ -28,19 +28,19 @@
 
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
-                    <li id='navStories' class="nav-item active">
+                    <li id='navStories' class="nav-item">
                         <div class="nav-link" style="cursor: pointer;">Stories
-                            <span id="navStoriesActive" class="sr-only">(current)</span>
+                            <!-- <span id="navStoriesActive" class="sr-only">(current)</span> -->
                         </div>
                     </li>
                     <li id='navCreate' class="nav-item">
                         <div class="nav-link" style="cursor: pointer;">Create
-                            <span id="navCreateActive" class="sr-only">(current)</span>
+                            <!-- <span id="navCreateActive" class="sr-only">(current)</span> -->
                         </div>
                     </li>
                     <li id='navAbout' class="nav-item">
                         <div class="nav-link" style="cursor: pointer;">About
-                            <span id="navAboutActive" class="sr-only">(current)</span>
+                            <!-- <span id="navAboutActive" class="sr-only">(current)</span> -->
                         </div>
                     </li>
                 </ul>
@@ -125,10 +125,22 @@
                             <input type="password" id="signup-password-input" name="password" class="form-control">
                             <ul id="password-errors"></ul>
                         </div>
+                        <div class="col-lg-10 col-md-6 col-sm-8" style="right: -64%;">
+                            <button type="submit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="log-in" hidden>
+                    <div class="panel-body">
                         <div class="col-lg-10 col-md-6 col-sm-8">
-                            <label for="repeat-password">Repeat Password:</label>
-                            <input type="repeat-password" id="signup-repeat-password-input" name="repeat-password" class="form-control">
-                            <ul id="repeat-password-errors"></ul>
+                            <label for="log-in-username">Username:</label>
+                            <input type="text" id="log-in-username-input" name="log-in-username" class="form-control">
+                            <ul id="log-in-username-errors"></ul>
+                        </div>
+                        <div class="col-lg-10 col-md-6 col-sm-8">
+                            <label for="log-in-password">Password:</label>
+                            <input type="log-in-password" id="log-in-password-input" name="log-in-password" class="form-control">
+                            <ul id="log-in-password-errors"></ul>
                         </div>
                         <div class="col-lg-10 col-md-6 col-sm-8" style="right: -64%;">
                             <button type="submit">Submit</button>
@@ -136,7 +148,7 @@
                     </div>
                 </div>
             </div>
-            <div id="all-genres" class="sidebar">
+            <!-- <div id="all-genres" class="sidebar">
                 <div class="block">
                     <h2>All Genres:</h2>
                     <ul>
@@ -173,7 +185,7 @@
                             <a title="" href="#">January 2011</a> (5)</li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
         </div>
         <script src="https://unpkg.com/underscore"></script>
         <script src="vendor/alertify.js-0.3.11/src/alertify.js"></script>

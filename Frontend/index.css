@@ -82,26 +82,18 @@ div .sidebar {
 	border-bottom-right-radius: 0px;
 }
 
-.clear {
-    clear: both;
-    display: block;
-    height: 0;
-    overflow: hidden;
-    visibility: hidden;
-    width: 0;
-}
-
 .content .column {
     float:left;
     width:605px;
     padding:0 23px 7px 28px;
 }
+
 .content .sidebar {
         float:left;
         width:235px;
         border-left:1px solid #444;
         padding:0 39px 7px 25px;
-    }
+}
     
 body, html {
     font-size: 120%;

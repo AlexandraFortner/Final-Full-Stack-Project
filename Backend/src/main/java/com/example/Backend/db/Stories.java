@@ -20,7 +20,6 @@ public class Stories {
                 ResultSet rs = st.executeQuery();
                 ArrayList<Story> allstories = new ArrayList<Story>();
                 while (rs.next()) {
-//                    String titles = rs.getString("story_title");
                     allstories.add(new Story(
                             rs.getInt("id"),
                             rs.getString("story_author_name"),

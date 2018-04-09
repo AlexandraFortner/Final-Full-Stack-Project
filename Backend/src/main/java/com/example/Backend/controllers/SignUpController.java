@@ -11,8 +11,10 @@ import java.util.*;
 
 @RestController
 public class SignUpController {
+    //    SETTING UP THE INITIAL SALT
     @Value("${app.salt}")
     private String salt;
+//____________________________________________________________________________________________
     @CrossOrigin()
     @PostMapping("/SignUp/")
     public User signUp(@RequestBody User newPerson) {
