@@ -7,7 +7,7 @@ API_URL = 'http://localhost:8080/';
 
 var validations = {
     IsLoggedIn: false,
-    AuthorName: false,
+    AuthorName: '',
     Title: false,
     StorySummary: false,
     Story: false
@@ -90,6 +90,8 @@ function getGenre(genre) {
         newGenre = 'Teen Fiction'
     } else if (genre == 16) {
         newGenre = 'Random'
+    } else if (genre == 17) {
+        newGenre = 'Opinion/Analysis'
     } else {
         newGenre = null
     }
@@ -190,13 +192,12 @@ function moveNewStoryToExistingStories() {
 function registerSignUpHandler() {
     $('#sign-up').on('submit', function (event) {
         event.preventDefault();
-        console.log(
-            JSON.stringify({
-                // IntelliJ (adoptername): Html form id(#adopterName-input')
-                username: $('#signup-username-input').val(),
-                password: $('#signup-password-input').val(),
-            })
-        );
+        validations.IsLoggedIn = true;
+        isLoggedIn();
+
+        // BELOW SETS THE AUTHOR NAME FOR THE WHOLE OF THE SESSION UNTIL USER LOGS OUT
+        validations.AuthorName = $('#signup-username-input').val();
+
         $.ajax({
             url: 'http://localhost:8080/signup/',
             method: 'post',
