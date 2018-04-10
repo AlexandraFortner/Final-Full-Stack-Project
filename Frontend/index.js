@@ -151,6 +151,7 @@ $("#navStories").click(function (event) {
     $('#stories').removeAttr('hidden');
     $('#new-story-form').attr('hidden', 'hidden');
     $('#users').attr('hidden', 'hidden');
+    $('#profile-info').attr('hidden', 'hidden');
 });
 
 $("#navUsers").click(function (event) {
@@ -160,6 +161,7 @@ $("#navUsers").click(function (event) {
     $('#stories').attr('hidden', 'hidden');
     $('#users').removeAttr('hidden');
     $('#new-story-form').attr('hidden', 'hidden');
+    $('#profile-info').attr('hidden', 'hidden');
 });
 
 $("#navAbout").click(function (event) {
@@ -169,6 +171,7 @@ $("#navAbout").click(function (event) {
     $('#stories').attr('hidden', 'hidden');
     $('#about').removeAttr('hidden');
     $('#users').attr('hidden', 'hidden');
+    $('#profile-info').attr('hidden', 'hidden');
 });
 
 $('#navCreate').click(function (event) {
@@ -178,6 +181,17 @@ $('#navCreate').click(function (event) {
     $('#stories').attr('hidden', 'hidden');
     $('#users').attr('hidden', 'hidden');
     $('#new-story-form').removeAttr('hidden');
+    $('#profile-info').attr('hidden', 'hidden');
+});
+
+$('#user-profile-icon').click(function (event) {
+    event.preventDefault();
+    // alertify.log('You\'ve clicked Create!');
+    $('#about').attr('hidden', 'hidden');
+    $('#stories').attr('hidden', 'hidden');
+    $('#users').attr('hidden', 'hidden');
+    $('#new-story-form').attr('hidden', 'hidden');
+    $('#profile-info').removeAttr('hidden');
 });
 
 // SIGNUP .CLICKS
@@ -225,6 +239,7 @@ $('#log-in-password-input').on('input', function (event) {
         /\d/.test(password)
     )) {
         string += '<li>Password must be 8-20 characters long.</li>';
+
         $('#log-in-password-input').css("border", "red double");
         string +=
             '<li>Alert! You must use a letter and a number in your password.</li>';
@@ -397,7 +412,7 @@ function postToNewStoryRoute(author, title, story, genre, storySummary) {
 
 document.getElementById('new-story-form').onsubmit = event => {
     event.preventDefault();
-    alertify.log('Submitted!');
+    alertify.log('Submitted');
     let form = event.target;
     let author = form.author.value;
     let title = form.title.value;
