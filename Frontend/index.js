@@ -5,6 +5,16 @@ API_URL = 'http://localhost:8080/';
 
 // VALIDATIONS BEGIN
 
+var loginValidations = {
+    username: false,
+    passord: false
+}
+
+var signupValidations = {
+    username: false,
+    passord: false
+}
+
 var validations = {
     IsLoggedIn: true,
     AuthorName: '',
@@ -13,28 +23,27 @@ var validations = {
     Story: false
 };
 
-function maybeEnableButton() {
+function logInMaybeEnableButton() {
     if (
-        validations.AuthorName === true &&
-        validations.password === true &&
-        validations.repeatPass === true
+        loginValidations.username === true &&
+        loginValidations.password === true
+    ) {
+        $('#LogInButton').attr('disabled', false);
+    } else {
+        $('#LogInButton').attr('disabled', true);
+    }
+}
+
+function signUpMaybeEnableButton() {
+    if (
+        signupValidations.username === true &&
+        signupValidations.password === true
     ) {
         $('#SignUpButton').attr('disabled', false);
     } else {
         $('#SignUpButton').attr('disabled', true);
     }
 }
-
-// function AuthorNameValidations() {
-//     if (validations.AuthorName == false) {
-//         console.log('The user is not logged in.');
-//     } else if (validations.AuthorName == true) {
-//         console.log('The user is logged in.');
-//         $('#sign-up').removeAttr('hidden');
-//     } else {
-//         console.log('ERROR.')
-//     }
-// }
 
 function isLoggedIn() {
     if (validations.IsLoggedIn == false) {
@@ -43,6 +52,7 @@ function isLoggedIn() {
         $('#stories').attr('hidden', 'hidden');
         $('#about').attr('hidden', 'hidden');
         $('#navbar').attr('hidden', 'hidden');
+        $('#users').attr('hidden', 'hidden');
         // $('#sign-up').removeAttr('hidden');
         $('#log-in').removeAttr('hidden');
     } else if (validations.IsLoggedIn == true) {
@@ -51,6 +61,7 @@ function isLoggedIn() {
         $('#navbar').removeAttr('hidden');
         $('#sign-up').attr('hidden', 'hidden');
         $('#log-in').attr('hidden', 'hidden');
+        $('#users').removeAttr('hidden');
     } else {
         console.log('ERROR.')
     }
@@ -118,6 +129,17 @@ function story(stories) {
     }).join("");
     return "<h3>All Stories:</h3>" + storyStructure;
 }
+
+function user(users) {
+    var userStructure = users.map(function (user) {
+        return [
+            "<div id='all-users' class='card text-white bg-dark mb-3' style='max-width: 30rem;'>",
+            "<div class='card-body'>" + user.username +
+            "</div></div>"
+        ].join("")
+    }).join("");
+    return "<h3>All Users:</h3>" + userStructure;
+}
 // STOPS DISPLAYING INFORMATION IN HTML
 // .CLICKS BEGIN ||| THE "DIFFERENT PAGES" BEGIN
 
@@ -128,9 +150,16 @@ $("#navStories").click(function (event) {
     $('#about').attr('hidden', 'hidden');
     $('#stories').removeAttr('hidden');
     $('#new-story-form').attr('hidden', 'hidden');
-    $('#navStoriesActive').removeAttr('hidden');
-    $('#navCreateActive').attr('hidden', 'hidden');
-    $('#navAboutActive').attr('hidden', 'hidden');
+    $('#users').attr('hidden', 'hidden');
+});
+
+$("#navUsers").click(function (event) {
+    event.preventDefault();
+    // alertify.log('You\'re looking at Stories!');
+    $('#about').attr('hidden', 'hidden');
+    $('#stories').attr('hidden', 'hidden');
+    $('#users').removeAttr('hidden');
+    $('#new-story-form').attr('hidden', 'hidden');
 });
 
 $("#navAbout").click(function (event) {
@@ -139,9 +168,7 @@ $("#navAbout").click(function (event) {
     $('#new-story-form').attr('hidden', 'hidden');
     $('#stories').attr('hidden', 'hidden');
     $('#about').removeAttr('hidden');
-    $('#navAboutActive').removeAttr('hidden');
-    $('#navCreateActive').attr('hidden', 'hidden');
-    $('#navStoriesActive').attr('hidden', 'hidden');
+    $('#users').attr('hidden', 'hidden');
 });
 
 $('#navCreate').click(function (event) {
@@ -149,10 +176,8 @@ $('#navCreate').click(function (event) {
     // alertify.log('You\'ve clicked Create!');
     $('#about').attr('hidden', 'hidden');
     $('#stories').attr('hidden', 'hidden');
+    $('#users').attr('hidden', 'hidden');
     $('#new-story-form').removeAttr('hidden');
-    $('#navCreateActive').removeAttr('hidden');
-    $('#navStoriesActive').attr('hidden', 'hidden');
-    $('#navAboutActive').attr('hidden', 'hidden');
 });
 
 // SIGNUP .CLICKS
@@ -170,10 +195,98 @@ $('#log-in-button').click(function (event) {
     $('#log-in').removeAttr('hidden');
 });
 
-// .CLICKS ENDS ||| THE "DIFFERENT PAGES" BEGIN
+// .CLICKS ENDS ||| ON INPUTS BEGIN
+
+// LOG IN USERNAME VALIDATION
+$('#log-in-username-input').on('input', function (event) {
+    var username = event.currentTarget.value;
+    var array = [8, 9, 10, 11, 12, 13, 14, 15, 16];
+    var errorUL = $('#log-in-username-errors');
+    if (array.includes(username.length)) {
+        loginValidations.username = true;
+        errorUL.html('');
+    } else {
+        loginValidations.username = false;
+        errorUL.html('<li>Username must be 8-16 characters long.</li>');
+    }
+    logInMaybeEnableButton();
+});
+
+// LOG-IN PASSWORD VALIDATION
+$('#log-in-password-input').on('input', function (event) {
+    var string = '';
+    var password = event.currentTarget.value;
+    var array = [8, 9, 10, 11, 12, 13, 14, 15, 16];
+    var errorUL = $('#log-in-password-errors');
+    if (!array.includes(password.length)) {
+        string += '<li>Password must be 12-16 characters long.</li>';
+    }
+    if (
+        !(
+            /[!?&.,_]/.test(password) &&
+            /[a-zA-Z]/.test(password) &&
+            /\d/.test(password)
+        )
+    ) {
+        string +=
+            '<li>Alert! You must use a letter, a number, and punctuation in your password.</li>';
+    }
+    loginValidations.pass = string.length === 0;
+    errorUL.html(string);
+    logInMaybeEnableButton();
+});
+
+
+// SIGN-UP USERNAME VALIDATION
+$('#sign-up-username-input').on('input', function (event) {
+    var username = event.currentTarget.value;
+    var array = [8, 9, 10, 11, 12, 13, 14, 15, 16];
+    var errorUL = $('#sign-up-username-errors');
+    if (array.includes(username.length)) {
+        signupValidations.username = true;
+        errorUL.html('');
+    } else {
+        signupValidations.username = false;
+        errorUL.html('<li>Username must be 8-16 characters long.</li>');
+    }
+    signUpMaybeEnableButton();
+});
+
+// SIGN UP PASSWORD VALIDATION
+$('#sign-up-password-input').on('input', function (event) {
+    var string = '';
+    var password = event.currentTarget.value;
+    var array = [8, 9, 10, 11, 12, 13, 14, 15, 16];
+    var errorUL = $('#sign-up-password-errors');
+    if (!array.includes(password.length)) {
+        string += '<li>Password must be 12-16 characters long.</li>';
+    }
+    if (
+        !(
+            /[!?&.,_]/.test(password) &&
+            /[a-zA-Z]/.test(password) &&
+            /\d/.test(password)
+        )
+    ) {
+        string +=
+            '<li>Alert! You must use a letter, a number, and punctuation in your password.</li>';
+    }
+    else {
+        signupValidations.password = true;
+    }
+    signupValidations.pass = string.length === 0;
+    errorUL.html(string);
+    signUpMaybeEnableButton();
+});
+
+//ON INPUTS END ||| THE "DIFFERENT PAGES" BEGIN
 
 function initializeExistingStoriesView(stories) {
     $("#stories").html(story(stories));
+}
+
+function initializeExistingUsersView(users) {
+    $('#users').html(user(users));
 }
 
 function moveNewStoryToExistingStories() {
@@ -197,7 +310,7 @@ function registerSignUpHandler() {
         isLoggedIn();
 
         // BELOW SETS THE AUTHOR NAME FOR THE WHOLE OF THE SESSION UNTIL USER LOGS OUT
-        validations.AuthorName = $('#signup-username-input').val();
+        validations.AuthorName = $('#sign-up-username-input').val();
 
         $.ajax({
             url: 'http://localhost:8080/signup/',
@@ -205,8 +318,8 @@ function registerSignUpHandler() {
             dataType: 'json',
             crossDomain: true,
             data: JSON.stringify({
-                username: $('#signup-username-input').val(),
-                password: $('#signup-password-input').val(),
+                username: $('#sign-up-username-input').val(),
+                password: $('#sign-up-password-input').val(),
             }),
             contentType: 'application/json',
             mimeType: 'application/json',
@@ -217,7 +330,7 @@ function registerSignUpHandler() {
     });
 }
 
-// function registerSignUpHandler() {
+// function registerLogInHandler() {
 //     $('#log-in').on('submit', function (event) {
 //         event.preventDefault();
 //         validations.IsLoggedIn = true;
@@ -281,6 +394,13 @@ function showStories() {
     window.onload = () => fetch('http://localhost:8080/stories/')
         .then(response => response.json())
         .then(initializeExistingStoriesView);
+    $('#users').attr('hidden', 'hidden');
+}
+
+function showUsers() {
+    fetch('http://localhost:8080/users/')
+        .then(response => response.json())
+        .then(initializeExistingUsersView);
 }
 
 function mainDraw() {
@@ -288,6 +408,7 @@ function mainDraw() {
     // checkIfLoggedIn();
     isLoggedIn();
     showStories();
+    showUsers();
     // form_validations();
 }
 mainDraw();

@@ -122,23 +122,23 @@
                         <h3>Sign Up:</h3>
                         <div class="col-lg-10 col-md-6 col-sm-8">
                             <label for="username">Username:</label>
-                            <input type="text" id="signup-username-input" name="username" class="form-control">
-                            <ul id="username-errors"></ul>
+                            <input type="text" id="sign-up-username-input" name="username" class="form-control">
+                            <ul id="sign-up-username-errors"></ul>
                         </div>
                         <div class="col-lg-10 col-md-6 col-sm-8">
                             <label for="password">Password:</label>
-                            <input type="password" id="signup-password-input" name="password" class="form-control">
-                            <ul id="password-errors"></ul>
+                            <input type="password" id="sign-up-password-input" name="password" class="form-control">
+                            <ul id="sign-up-password-errors"></ul>
                         </div>
                         <div class="col-lg-10 col-md-6 col-sm-8" style="font-size:20px;">
                             <button id="log-in-button" class="signup-login-button" type="submit">Already have an account? Log In!</button>
                         </div>
                         <div class="col-lg-10 col-md-6 col-sm-8" style="right: -64%;">
-                            <button type="submit">Submit!</button>
+                            <button id="SignUpButton" type="submit">Submit!</button>
                         </div>
                 </form>
                 </div>
-                <div id="log-in" hidden>
+                <form id="log-in" hidden>
                     <div class="panel-body">
                         <h3>Log In:</h3>
                         <div class="col-lg-10 col-md-6 col-sm-8">
@@ -155,10 +155,10 @@
                             <button id="sign-up-button" class="signup-login-button" type="submit">Don't have an account? Sign Up!</button>
                         </div>
                         <div class="col-lg-10 col-md-6 col-sm-8" style="right: -64%;">
-                            <button type="submit">Submit!</button>
+                            <button id="LogInButton" type="submit">Submit!</button>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
             <!-- <div id="all-genres" class="sidebar">
                 <div class="block">
