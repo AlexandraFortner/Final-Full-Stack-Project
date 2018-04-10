@@ -1,6 +1,7 @@
 package com.example.Backend.db;
 
 import com.example.Backend.core.User;
+import com.example.Backend.dto.NewUser;
 import com.example.Backend.db.Connect;
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,17 +9,15 @@ import java.util.List;
 
 public class Users {
 
-    public static List<User> all() {
+    public static List<NewUser> all() {
         try{
             Connection c = Connect.connect();
             PreparedStatement st = c.prepareStatement("SELECT * FROM users;");
             ResultSet rs = st.executeQuery();
-            ArrayList<User> allusers = new ArrayList<User>();
+            ArrayList<NewUser> allusers = new ArrayList<NewUser>();
             while (rs.next()) {
-                allusers.add(new User(
-                        rs.getInt("id"),
-                        rs.getString("username"),
-                        rs.getString("password_hash")
+                allusers.add(new NewUser(
+                        rs.getString("username")
                 ));
                 // ABOVE PARENTHESES() GETS SQL COLUMN NAMES
             }
