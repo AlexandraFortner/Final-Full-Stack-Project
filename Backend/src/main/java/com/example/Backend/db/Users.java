@@ -43,15 +43,12 @@ public class Users {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
-            System.out.println(".next");
             User user =  new User(resultSet.getInt("id"), resultSet.getString("username"),
                     resultSet.getString("password_hash"));
             conn.close();
-            System.out.println(".close");
             return user;
         }
         catch (SQLException e){
-            System.out.println("Failed to Users.loginUser");
             System.out.println(e.getMessage());
             return null;
         }

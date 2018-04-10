@@ -23,10 +23,6 @@ var validations = {
     Story: false
 };
 
-function wrongValidations() {
-
-}
-
 function logInMaybeEnableButton() {
     if (
         loginValidations.username === true &&
@@ -224,15 +220,11 @@ $('#log-in-password-input').on('input', function (event) {
     var password = event.currentTarget.value;
     var array = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
     var errorUL = $('#log-in-password-errors');
-    if (!array.includes(password.length)) {
+    if (!array.includes(password.length) && !(
+        /[a-zA-Z]/.test(password) &&
+        /\d/.test(password)
+    )) {
         string += '<li>Password must be 8-20 characters long.</li>';
-    }
-    if (
-        !(
-            /[a-zA-Z]/.test(password) &&
-            /\d/.test(password)
-        )
-    ) {
         $('#log-in-password-input').css("border", "red double");
         string +=
             '<li>Alert! You must use a letter and a number in your password.</li>';
@@ -337,6 +329,16 @@ function registerSignUpHandler() {
             mimeType: 'application/json',
             error: function (data, status, er) {
                 alert('status: ' + status);
+            },
+            success: function (data) {
+                // console.log(data);
+                validations.IsLoggedIn = true;
+                isLoggedIn();
+                showStories();
+                showUsers();
+
+                // BELOW SETS THE AUTHOR NAME FOR THE WHOLE OF THE SESSION UNTIL USER LOGS OUT
+                validations.AuthorName = $('#sign-up-username-input').val();
             }
         });
     });
@@ -358,13 +360,14 @@ function registerLogInHandler() {
             contentType: 'application/json',
             mimeType: 'application/json',
             error: function (data, status, er) {
-                wrongValidations();
-                // alertify.error('Wrong information. Try again.');
+                alertify.alert('Wrong information. Try again.');
             },
             success: function (data) {
-                console.log(data);
+                // console.log(data);
                 validations.IsLoggedIn = true;
                 isLoggedIn();
+                showStories();
+                showUsers();
 
                 // BELOW SETS THE AUTHOR NAME FOR THE WHOLE OF THE SESSION UNTIL USER LOGS OUT
                 validations.AuthorName = $('#log-in-username-input').val();
@@ -394,7 +397,7 @@ function postToNewStoryRoute(author, title, story, genre, storySummary) {
 
 document.getElementById('new-story-form').onsubmit = event => {
     event.preventDefault();
-    alertify.log('Submitted');
+    alertify.log('Submitted!');
     let form = event.target;
     let author = form.author.value;
     let title = form.title.value;
@@ -408,7 +411,7 @@ document.getElementById('new-story-form').onsubmit = event => {
 
 // SHOWSTORIES FUNCTION SHOWS ALL STORY DATA AS JSON AND DISPLAYS THEM VIA SPRING BACKEND: http://localhost:8080/stories
 function showStories() {
-    window.onload = () => fetch('http://localhost:8080/stories/')
+    fetch('http://localhost:8080/stories/')
         .then(response => response.json())
         .then(initializeExistingStoriesView);
     $('#users').attr('hidden', 'hidden');
@@ -421,12 +424,9 @@ function showUsers() {
 }
 
 function mainDraw() {
+    isLoggedIn();
     registerSignUpHandler();
     registerLogInHandler();
-    // checkIfLoggedIn();
-    isLoggedIn();
-    showStories();
-    showUsers();
-    // form_validations();
+
 }
 mainDraw();
