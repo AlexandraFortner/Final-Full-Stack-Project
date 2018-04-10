@@ -3,9 +3,7 @@
     create table if not exists users(
         id serial unique primary key,
         username varchar(150) unique,
-        password_hash varchar(250),
-        profile_picture text,
-        profile_summary text
+        password_hash varchar(250)
     );
 
     create table if not exists stories(

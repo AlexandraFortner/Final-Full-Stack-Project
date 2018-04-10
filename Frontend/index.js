@@ -6,7 +6,7 @@ API_URL = 'http://localhost:8080/';
 // VALIDATIONS BEGIN
 
 var validations = {
-    IsLoggedIn: false,
+    IsLoggedIn: true,
     AuthorName: '',
     Title: false,
     StorySummary: false,
@@ -188,6 +188,7 @@ function moveNewStoryToExistingStories() {
     // newLi.innerText = story;
     // existingStoriesDiv.appendChild(newLi);
 }
+
 // HELPED
 function registerSignUpHandler() {
     $('#sign-up').on('submit', function (event) {
@@ -215,6 +216,33 @@ function registerSignUpHandler() {
         });
     });
 }
+
+// function registerSignUpHandler() {
+//     $('#log-in').on('submit', function (event) {
+//         event.preventDefault();
+//         validations.IsLoggedIn = true;
+//         isLoggedIn();
+
+//         // BELOW SETS THE AUTHOR NAME FOR THE WHOLE OF THE SESSION UNTIL USER LOGS OUT
+//         validations.AuthorName = $('#log-in-username-input').val();
+
+//         $.ajax({
+//             url: 'http://localhost:8080/login/',
+//             method: 'post',
+//             dataType: 'json',
+//             crossDomain: true,
+//             data: JSON.stringify({
+//                 username: $('#signup-username-input').val(),
+//                 password: $('#signup-password-input').val(),
+//             }),
+//             contentType: 'application/json',
+//             mimeType: 'application/json',
+//             error: function (data, status, er) {
+//                 alert('status: ' + status);
+//             }
+//         });
+//     });
+// }
 
 function postToNewStoryRoute(author, title, story, genre, storySummary) {
     let story_dto = {
