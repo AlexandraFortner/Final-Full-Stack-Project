@@ -16,12 +16,16 @@ var signupValidations = {
 }
 
 var validations = {
-    IsLoggedIn: true,
+    IsLoggedIn: false,
     AuthorName: '',
     Title: false,
     StorySummary: false,
     Story: false
 };
+
+function wrongValidations() {
+
+}
 
 function logInMaybeEnableButton() {
     if (
@@ -200,14 +204,16 @@ $('#log-in-button').click(function (event) {
 // LOG IN USERNAME VALIDATION
 $('#log-in-username-input').on('input', function (event) {
     var username = event.currentTarget.value;
-    var array = [8, 9, 10, 11, 12, 13, 14, 15, 16];
+    var array = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
     var errorUL = $('#log-in-username-errors');
     if (array.includes(username.length)) {
+        $('#log-in-username-input').css("border", "green double");
         loginValidations.username = true;
         errorUL.html('');
     } else {
+        $('#log-in-username-input').css("border", "red double");
         loginValidations.username = false;
-        errorUL.html('<li>Username must be 8-16 characters long.</li>');
+        errorUL.html('<li>Username must be 8-20 characters long.</li>');
     }
     logInMaybeEnableButton();
 });
@@ -216,20 +222,23 @@ $('#log-in-username-input').on('input', function (event) {
 $('#log-in-password-input').on('input', function (event) {
     var string = '';
     var password = event.currentTarget.value;
-    var array = [8, 9, 10, 11, 12, 13, 14, 15, 16];
+    var array = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
     var errorUL = $('#log-in-password-errors');
     if (!array.includes(password.length)) {
-        string += '<li>Password must be 12-16 characters long.</li>';
+        string += '<li>Password must be 8-20 characters long.</li>';
     }
     if (
         !(
-            /[!?&.,_]/.test(password) &&
             /[a-zA-Z]/.test(password) &&
             /\d/.test(password)
         )
     ) {
+        $('#log-in-password-input').css("border", "red double");
         string +=
-            '<li>Alert! You must use a letter, a number, and punctuation in your password.</li>';
+            '<li>Alert! You must use a letter and a number in your password.</li>';
+    } else {
+        $('#log-in-password-input').css("border", "green double");
+        loginValidations.password = true;
     }
     loginValidations.pass = string.length === 0;
     errorUL.html(string);
@@ -240,14 +249,16 @@ $('#log-in-password-input').on('input', function (event) {
 // SIGN-UP USERNAME VALIDATION
 $('#sign-up-username-input').on('input', function (event) {
     var username = event.currentTarget.value;
-    var array = [8, 9, 10, 11, 12, 13, 14, 15, 16];
+    var array = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
     var errorUL = $('#sign-up-username-errors');
     if (array.includes(username.length)) {
+        $('#sign-up-username-input').css("border", "green double");
         signupValidations.username = true;
         errorUL.html('');
     } else {
+        $('#sign-up-username-input').css("border", "red double");
         signupValidations.username = false;
-        errorUL.html('<li>Username must be 8-16 characters long.</li>');
+        errorUL.html('<li>Username must be 8-20 characters long.</li>');
     }
     signUpMaybeEnableButton();
 });
@@ -256,22 +267,23 @@ $('#sign-up-username-input').on('input', function (event) {
 $('#sign-up-password-input').on('input', function (event) {
     var string = '';
     var password = event.currentTarget.value;
-    var array = [8, 9, 10, 11, 12, 13, 14, 15, 16];
+    var array = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
     var errorUL = $('#sign-up-password-errors');
     if (!array.includes(password.length)) {
-        string += '<li>Password must be 12-16 characters long.</li>';
+        string += '<li>Password must be 8-20 characters long.</li>';
     }
     if (
         !(
-            /[!?&.,_]/.test(password) &&
             /[a-zA-Z]/.test(password) &&
             /\d/.test(password)
         )
     ) {
+        $('#sign-up-password-input').css("border", "red double");
         string +=
-            '<li>Alert! You must use a letter, a number, and punctuation in your password.</li>';
+            '<li>Alert! You must use a letter and a number in your password.</li>';
     }
     else {
+        $('#sign-up-password-input').css("border", "green double");
         signupValidations.password = true;
     }
     signupValidations.pass = string.length === 0;
@@ -330,32 +342,37 @@ function registerSignUpHandler() {
     });
 }
 
-// function registerLogInHandler() {
-//     $('#log-in').on('submit', function (event) {
-//         event.preventDefault();
-//         validations.IsLoggedIn = true;
-//         isLoggedIn();
+function registerLogInHandler() {
+    $('#log-in').on('submit', function (event) {
+        event.preventDefault();
 
-//         // BELOW SETS THE AUTHOR NAME FOR THE WHOLE OF THE SESSION UNTIL USER LOGS OUT
-//         validations.AuthorName = $('#log-in-username-input').val();
+        $.ajax({
+            url: 'http://localhost:8080/login',
+            method: 'post',
+            crossDomain: true,
+            dataType: 'json',
+            data: JSON.stringify({
+                username: $('#log-in-username-input').val(),
+                password: $('#log-in-password-input').val(),
+            }),
+            contentType: 'application/json',
+            mimeType: 'application/json',
+            error: function (data, status, er) {
+                wrongValidations();
+                // alertify.error('Wrong information. Try again.');
+            },
+            success: function (data) {
+                console.log(data);
+                validations.IsLoggedIn = true;
+                isLoggedIn();
 
-//         $.ajax({
-//             url: 'http://localhost:8080/login/',
-//             method: 'post',
-//             dataType: 'json',
-//             crossDomain: true,
-//             data: JSON.stringify({
-//                 username: $('#signup-username-input').val(),
-//                 password: $('#signup-password-input').val(),
-//             }),
-//             contentType: 'application/json',
-//             mimeType: 'application/json',
-//             error: function (data, status, er) {
-//                 alert('status: ' + status);
-//             }
-//         });
-//     });
-// }
+                // BELOW SETS THE AUTHOR NAME FOR THE WHOLE OF THE SESSION UNTIL USER LOGS OUT
+                validations.AuthorName = $('#log-in-username-input').val();
+            }
+        });
+
+    });
+}
 
 function postToNewStoryRoute(author, title, story, genre, storySummary) {
     let story_dto = {
@@ -405,6 +422,7 @@ function showUsers() {
 
 function mainDraw() {
     registerSignUpHandler();
+    registerLogInHandler();
     // checkIfLoggedIn();
     isLoggedIn();
     showStories();

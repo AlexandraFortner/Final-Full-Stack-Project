@@ -23,10 +23,36 @@ public class Users {
             }
             return allusers;
         }
-        catch (Exception e) {
+        catch (SQLException e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName()+": "+e.getMessage());
             System.exit(0);
+            return null;
+        }
+    }
+
+    public static User loginUser(String username, String password_hash){
+        try{
+            Connection conn = Connect.connect();
+            PreparedStatement preparedStatement = conn.prepareStatement(
+                    "select * from users "+
+                            "where username = ? and password_hash = ?;"
+            );
+            preparedStatement.setString(1,username);
+            preparedStatement.setString(2,password_hash);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            System.out.println(".next");
+            User user =  new User(resultSet.getInt("id"), resultSet.getString("username"),
+                    resultSet.getString("password_hash"));
+            conn.close();
+            System.out.println(".close");
+            return user;
+        }
+        catch (SQLException e){
+            System.out.println("Failed to Users.loginUser");
+            System.out.println(e.getMessage());
             return null;
         }
     }
