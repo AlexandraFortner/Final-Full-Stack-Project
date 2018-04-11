@@ -246,16 +246,22 @@ $('#log-in-password-input').on('input', function (event) {
     var password = event.currentTarget.value;
     var array = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
     var errorUL = $('#log-in-password-errors');
-    if (!array.includes(password.length) & !(
-        /[a-zA-Z]/.test(password) &&
-        /\d/.test(password)
-    )) {
+    if (!array.includes(password.length)) {
         string += '<li>Password must be 8-20 characters long.</li>';
 
         $('#log-in-password-input').css("border", "red double");
+
+    } if (
+        !(
+            /[a-zA-Z]/.test(password) &&
+            /\d/.test(password)
+        )
+    ) {
+        $('#log-in-password-input').css("border", "red double");
         string +=
-            '<li>Alert! You must use a letter and a number in your password.</li>';
-    } else {
+            '<li>Alert! You must use a letter, a number, and punctuation in your password.</li>';
+    }
+    else {
         $('#log-in-password-input').css("border", "green double");
         loginValidations.password = true;
     }

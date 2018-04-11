@@ -18,7 +18,6 @@ public class LoginController {
 @CrossOrigin()
 @PostMapping("/login")
 public User logIn(@RequestBody Login newPerson) {
-
     String hashedPassword = BCrypt.hashpw(newPerson.password, salt);
 
     User newUser = Users.loginUser(newPerson.username ,hashedPassword);
