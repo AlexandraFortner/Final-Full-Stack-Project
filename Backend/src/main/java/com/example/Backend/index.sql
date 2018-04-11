@@ -21,6 +21,11 @@
     genre_name varchar(200)
     );
 
+    create table if not exists sessions(
+    id serial references users(id),
+    session_key text default null
+    );
+
 --    ALTER TABLE stories
 --    ADD COLUMN story_summary text;
 
@@ -30,4 +35,3 @@
 --    UPDATE stories SET story_summary = 'The very first story made for Nova.' where id = 1;
 
 --____________________________________________________________________________________________
-

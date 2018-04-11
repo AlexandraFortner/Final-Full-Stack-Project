@@ -140,6 +140,18 @@ function user(users) {
     }).join("");
     return "<h3>All Users:</h3>" + userStructure;
 }
+
+function profile() {
+    var profileStructure =
+        [
+            "<div id='profile-information'>",
+            "<div style='font-size: 24px;'>" + validations.AuthorName + "</div>",
+            "<button id='log-out-button' class='signup-login-button'> Log-Out</button><br>",
+            "<button id='delete-user-button' class='signup-login-button'> Delete Profile</button>",
+            "</div></div>"
+        ].join("")
+    return "<h3>Username:</h3>" + profileStructure;
+}
 // STOPS DISPLAYING INFORMATION IN HTML
 // .CLICKS BEGIN ||| THE "DIFFERENT PAGES" BEGIN
 
@@ -234,7 +246,7 @@ $('#log-in-password-input').on('input', function (event) {
     var password = event.currentTarget.value;
     var array = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
     var errorUL = $('#log-in-password-errors');
-    if (!array.includes(password.length) && !(
+    if (!array.includes(password.length) & !(
         /[a-zA-Z]/.test(password) &&
         /\d/.test(password)
     )) {
@@ -308,8 +320,12 @@ function initializeExistingUsersView(users) {
     $('#users').html(user(users));
 }
 
+function initializeProfileView() {
+    $('#profile-info').html(profile());
+}
+
 function moveNewStoryToExistingStories() {
-    let author = $('author').val();
+    let author = validations.AuthorName;
     let title = $('title').val();
     let story = $('story').val();
     let genre = $('genre').val();
@@ -351,9 +367,7 @@ function registerSignUpHandler() {
                 isLoggedIn();
                 showStories();
                 showUsers();
-
-                // BELOW SETS THE AUTHOR NAME FOR THE WHOLE OF THE SESSION UNTIL USER LOGS OUT
-                validations.AuthorName = $('#sign-up-username-input').val();
+                initializeProfileView();
             }
         });
     });
@@ -379,16 +393,15 @@ function registerLogInHandler() {
             },
             success: function (data) {
                 // console.log(data);
+                // BELOW SETS THE AUTHOR NAME FOR THE WHOLE OF THE SESSION UNTIL USER LOGS OUT
+                validations.AuthorName = $('#log-in-username-input').val();
                 validations.IsLoggedIn = true;
                 isLoggedIn();
                 showStories();
                 showUsers();
-
-                // BELOW SETS THE AUTHOR NAME FOR THE WHOLE OF THE SESSION UNTIL USER LOGS OUT
-                validations.AuthorName = $('#log-in-username-input').val();
+                initializeProfileView();
             }
         });
-
     });
 }
 
@@ -414,7 +427,7 @@ document.getElementById('new-story-form').onsubmit = event => {
     event.preventDefault();
     alertify.log('Submitted');
     let form = event.target;
-    let author = form.author.value;
+    let author = validations.AuthorName;
     let title = form.title.value;
     let story = form.story.value;
     let storySummary = form.storySummary.value;

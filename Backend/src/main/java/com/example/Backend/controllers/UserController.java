@@ -14,4 +14,11 @@ public class UserController {
     public List<NewUser> all() {
         return Users.all();
     }
+
+    @CrossOrigin()
+    @PostMapping("/deleteUser")
+    public NewUser deleteTheUser() {
+        return Users.deleteUser();
+    }
+
 }

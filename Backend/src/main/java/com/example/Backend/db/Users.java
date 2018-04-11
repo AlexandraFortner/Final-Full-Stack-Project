@@ -76,17 +76,16 @@ public class Users {
         }
     }
 
-    public static boolean deleteUser(Integer id){
+    public static boolean deleteUser(String username){
         try {
             Connection conn = Connect.connect();
             PreparedStatement preparedStatement = conn.prepareStatement(
-                    "DELETE FROM users WHERE id = ?"
+                    "DELETE FROM users WHERE username = ?"
             );
-            preparedStatement.setInt(1, id);
+            preparedStatement.setStr(1, username);
             preparedStatement.execute();
             conn.close();
             return true;
-
         }
         catch (SQLException e){
             System.out.println(e.getMessage());
