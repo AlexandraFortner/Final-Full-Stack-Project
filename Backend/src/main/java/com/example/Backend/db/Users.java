@@ -4,8 +4,7 @@ import com.example.Backend.core.User;
 import com.example.Backend.dto.NewUser;
 import com.example.Backend.db.Connect;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Users {
 
@@ -34,6 +33,8 @@ public class Users {
     public static User loginUser(String username, String password_hash){
         try{
             Connection conn = Connect.connect();
+            System.out.println(username);
+            System.out.println(password_hash);
             PreparedStatement preparedStatement = conn.prepareStatement(
                     "select * from users "+
                             "where username = ? and password_hash = ?;"
@@ -49,6 +50,7 @@ public class Users {
             return user;
         }
         catch (SQLException e){
+//            System.out.println("AGHHGHGHGHHGHGHGH");
             System.out.println(e.getMessage());
             return null;
         }
@@ -76,20 +78,59 @@ public class Users {
         }
     }
 
-    public static boolean deleteUser(String username){
-        try {
-            Connection conn = Connect.connect();
-            PreparedStatement preparedStatement = conn.prepareStatement(
-                    "DELETE FROM users WHERE username = ?"
-            );
-            preparedStatement.setStr(1, username);
-            preparedStatement.execute();
-            conn.close();
-            return true;
+//    public static boolean deleteUser(NewUser user){
+//        try {
+//            Connection conn = Connect.connect();
+//            PreparedStatement preparedStatement = conn.prepareStatement(
+//                    "DELETE FROM users WHERE username = ?"
+//            );
+//            preparedStatement.setStr(1, NewUser);
+//            preparedStatement.execute();
+//            conn.close();
+//            return true;
+//        }
+//        catch (SQLException e){
+//            System.out.println(e.getMessage());
+//            return false;
+//        }
+//    }
+
+    public static String sessionKey(String u, String pw) {
+        try{
+//            System.out.println("Username: " + u);
+//            System.out.println("Password: " + pw);
+            String random_items = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789!@~$%^&*-";
+            String[] random = random_items.split("");
+            String sessionKey = "";
+            Random r = new Random();
+            for (int x = 0; x < 20; x++){
+                int randInt = r.nextInt((random.length - 1) + 1);
+                sessionKey += random[randInt];
+            }
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            Connection c = Connect.connect();
+            User newPerson = loginUser(u, pw);
+            if (newPerson != null){
+                System.out.println("Success! Session Key NewPerson is: " + newPerson);
+                PreparedStatement st = c.prepareStatement("insert into sessions(id," +
+                        "session_key) values(?, ?);");
+                st.setInt(1, newPerson.id);
+                st.setString(2, sessionKey);
+//                System.out.println("NEW PERSON ID: " + newPerson.id);
+                st.execute();
+                st.close();
+                c.close();
+                return sessionKey;
+            } else {
+                System.out.println("Failure. Session Key NewPerson is: " + newPerson);
+                return null;
+            }
         }
-        catch (SQLException e){
-            System.out.println(e.getMessage());
-            return false;
+        catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName()+": "+e.getMessage());
+            System.exit(0);
+            return null;
         }
     }
 }

@@ -146,16 +146,16 @@ function profile() {
         [
             "<div id='profile-information'>",
             "<div style='font-size: 24px;'>" + validations.AuthorName + "</div>",
-            "<button id='log-out-button' class='signup-login-button'> Log-Out</button><br>",
-            "<button id='delete-user-button' class='signup-login-button'> Delete Profile</button>",
+            "<button id='log-out-button' class='signup-login-button'>Log-Out</button><br>",
+            "<button id='delete-user-button' class='signup-login-button'>Delete Profile</button>",
             "</div></div>"
         ].join("")
     return "<h3>Username:</h3>" + profileStructure;
 }
-// STOPS DISPLAYING INFORMATION IN HTML
-// .CLICKS BEGIN ||| THE "DIFFERENT PAGES" BEGIN
+//STOPS DISPLAYING INFORMATION IN HTML
+//.CLICKS BEGIN ||| THE "DIFFERENT PAGES" BEGIN
 
-// NAVBAR .CLICKS
+//NAVBAR .CLICKS
 $("#navStories").click(function (event) {
     event.preventDefault();
     // alertify.log('You\'re looking at Stories!');
@@ -206,7 +206,7 @@ $('#user-profile-icon').click(function (event) {
     $('#profile-info').removeAttr('hidden');
 });
 
-// SIGNUP .CLICKS
+//SIGNUP .CLICKS
 $('#sign-up-button').click(function (event) {
     event.preventDefault();
     $('#sign-up').removeAttr('hidden');
@@ -219,6 +219,12 @@ $('#log-in-button').click(function (event) {
     event.preventDefault();
     $('#sign-up').attr('hidden', 'hidden');
     $('#log-in').removeAttr('hidden');
+});
+
+$('log-out-button').click(function (event) {
+    event.preventDefault();
+    fetch('http://localhost:8080/deleteUser/')
+        .then(response => response.json())
 });
 
 // .CLICKS ENDS ||| ON INPUTS BEGIN
@@ -247,10 +253,8 @@ $('#log-in-password-input').on('input', function (event) {
     var array = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
     var errorUL = $('#log-in-password-errors');
     if (!array.includes(password.length)) {
-        string += '<li>Password must be 8-20 characters long.</li>';
-
         $('#log-in-password-input').css("border", "red double");
-
+        string += '<li>Password must be 8-20 characters long.</li>';
     } if (
         !(
             /[a-zA-Z]/.test(password) &&
@@ -259,7 +263,7 @@ $('#log-in-password-input').on('input', function (event) {
     ) {
         $('#log-in-password-input').css("border", "red double");
         string +=
-            '<li>Alert! You must use a letter, a number, and punctuation in your password.</li>';
+            '<li>Alert! You must use a letter and a number in your password.</li>';
     }
     else {
         $('#log-in-password-input').css("border", "green double");
@@ -296,6 +300,7 @@ $('#sign-up-password-input').on('input', function (event) {
     var errorUL = $('#sign-up-password-errors');
     if (!array.includes(password.length)) {
         string += '<li>Password must be 8-20 characters long.</li>';
+        $('#sign-up-password-input').css("border", "red double");
     }
     if (
         !(
@@ -370,10 +375,6 @@ function registerSignUpHandler() {
             success: function (data) {
                 // console.log(data);
                 validations.IsLoggedIn = true;
-                isLoggedIn();
-                showStories();
-                showUsers();
-                initializeProfileView();
             }
         });
     });
@@ -387,13 +388,11 @@ function registerLogInHandler() {
             url: 'http://localhost:8080/login',
             method: 'post',
             crossDomain: true,
-            dataType: 'json',
             data: JSON.stringify({
                 username: $('#log-in-username-input').val(),
                 password: $('#log-in-password-input').val(),
             }),
             contentType: 'application/json',
-            mimeType: 'application/json',
             error: function (data, status, er) {
                 alertify.alert('Wrong information. Try again.');
             },
@@ -402,10 +401,7 @@ function registerLogInHandler() {
                 // BELOW SETS THE AUTHOR NAME FOR THE WHOLE OF THE SESSION UNTIL USER LOGS OUT
                 validations.AuthorName = $('#log-in-username-input').val();
                 validations.IsLoggedIn = true;
-                isLoggedIn();
-                showStories();
-                showUsers();
-                initializeProfileView();
+                window.localStorage.setItem('sessionKey', data);
             }
         });
     });
@@ -457,10 +453,40 @@ function showUsers() {
         .then(initializeExistingUsersView);
 }
 
+function loginSession() {
+    // window.localStorage.setItem('username', validations.AuthorName);
+    // console.log(window.localStorage.getItem('username'));
+    // window.localStorage.setItem('session_key', session());
+}
+
+function checkForExistingLogin() {
+    var key = window.localStorage.getItem('sessionKey');
+    if (key) {
+        return fetch('http://localhost:8080/tokenIsValid', {
+            method: 'post',
+            mode: 'cors',
+            body: JSON.stringify({
+                sessionKey: key
+            })
+        }).then(response => response.json())
+            .then(j => {
+                validations.IsLoggedIn = j.isValid;
+            });
+    } else {
+        return new Promise((resolve, reject) => resolve());
+    }
+}
+
 function mainDraw() {
-    isLoggedIn();
-    registerSignUpHandler();
-    registerLogInHandler();
+    checkForExistingLogin().then(function () {
+        console.log('hello');
+        isLoggedIn();
+        registerSignUpHandler();
+        registerLogInHandler();
+        showStories();
+        showUsers();
+        initializeProfileView();
+    })
 
 }
 mainDraw();

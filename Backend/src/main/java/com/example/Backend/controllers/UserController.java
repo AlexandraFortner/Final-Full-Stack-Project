@@ -15,10 +15,16 @@ public class UserController {
         return Users.all();
     }
 
-    @CrossOrigin()
-    @PostMapping("/deleteUser")
-    public NewUser deleteTheUser() {
-        return Users.deleteUser();
-    }
+//    @CrossOrigin()
+//    @PostMapping("/deleteUser")
+//    public NewUser deleteTheUser() {
+//        Boolean delete = Users.deleteUser(NewUser);
+//        if (delete != true) {
+//            return delete;
+//        } else {
+//            System.out.println("Error.");
+//            return null;
+//        }
+//    }
 
 }

@@ -19,7 +19,6 @@ public class SignUpController {
     @CrossOrigin()
     @PostMapping("/signup")
     public User signUp(@RequestBody SignUp newPerson) {
-
         String hashedPassword = BCrypt.hashpw(newPerson.password, salt);
 
         User newUser = Users.insertUser(newPerson.username ,hashedPassword);
