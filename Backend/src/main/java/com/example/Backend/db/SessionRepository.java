@@ -24,4 +24,22 @@ public class SessionRepository {
             return false;
         }
     }
+
+    public static boolean deleteToken(String sessionKey) {
+        try {
+            Connection conn = Connect.connect();
+            PreparedStatement preparedStatement = conn.prepareStatement(
+                    "delete FROM sessions WHERE session_key = ?"
+            );
+            preparedStatement.setString(1,sessionKey);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next(); // if any sessions exist for that key, this will pass
+            conn.close();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
 }

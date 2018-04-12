@@ -221,12 +221,6 @@ $('#log-in-button').click(function (event) {
     $('#log-in').removeAttr('hidden');
 });
 
-$('log-out-button').click(function (event) {
-    event.preventDefault();
-    fetch('http://localhost:8080/deleteUser/')
-        .then(response => response.json())
-});
-
 // .CLICKS ENDS ||| ON INPUTS BEGIN
 
 // LOG IN USERNAME VALIDATION
@@ -333,6 +327,11 @@ function initializeExistingUsersView(users) {
 
 function initializeProfileView() {
     $('#profile-info').html(profile());
+    $('#log-out-button').click(function (event) {
+        event.preventDefault();
+        window.localStorage.removeItem('sessionKey');
+        window.location.reload();
+    });
 }
 
 function moveNewStoryToExistingStories() {
@@ -375,6 +374,10 @@ function registerSignUpHandler() {
             success: function (data) {
                 // console.log(data);
                 validations.IsLoggedIn = true;
+                isLoggedIn();
+                showStories();
+                showUsers();
+                initializeProfileView();
             }
         });
     });
@@ -383,7 +386,6 @@ function registerSignUpHandler() {
 function registerLogInHandler() {
     $('#log-in').on('submit', function (event) {
         event.preventDefault();
-
         $.ajax({
             url: 'http://localhost:8080/login',
             method: 'post',
@@ -402,6 +404,10 @@ function registerLogInHandler() {
                 validations.AuthorName = $('#log-in-username-input').val();
                 validations.IsLoggedIn = true;
                 window.localStorage.setItem('sessionKey', data);
+                isLoggedIn();
+                showStories();
+                showUsers();
+                initializeProfileView();
             }
         });
     });
@@ -453,12 +459,6 @@ function showUsers() {
         .then(initializeExistingUsersView);
 }
 
-function loginSession() {
-    // window.localStorage.setItem('username', validations.AuthorName);
-    // console.log(window.localStorage.getItem('username'));
-    // window.localStorage.setItem('session_key', session());
-}
-
 function checkForExistingLogin() {
     var key = window.localStorage.getItem('sessionKey');
     if (key) {
@@ -472,6 +472,7 @@ function checkForExistingLogin() {
             .then(j => {
                 validations.IsLoggedIn = j.isValid;
             });
+        isLoggedIn();
     } else {
         return new Promise((resolve, reject) => resolve());
     }
@@ -479,7 +480,6 @@ function checkForExistingLogin() {
 
 function mainDraw() {
     checkForExistingLogin().then(function () {
-        console.log('hello');
         isLoggedIn();
         registerSignUpHandler();
         registerLogInHandler();

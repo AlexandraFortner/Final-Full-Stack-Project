@@ -26,28 +26,34 @@ public class LoginController {
     @Value("${app.salt}")
     private String salt;
 
-//____________________________________________________________________________________________
-@CrossOrigin()
-@PostMapping("/login")
-public String logIn(@RequestBody Login newPerson) {
-    String hashedPassword = BCrypt.hashpw(newPerson.password, salt);
+    //____________________________________________________________________________________________
+    @CrossOrigin()
+    @PostMapping("/login")
+    public String logIn(@RequestBody Login newPerson) {
+        String hashedPassword = BCrypt.hashpw(newPerson.password, salt);
 
-    String s = Users.sessionKey(newPerson.username ,hashedPassword);
+        String s = Users.sessionKey(newPerson.username, hashedPassword);
 
-    if (s != null) {
-        System.out.println("Session Key is: " + s);
-        return s;
-    } else {
-        System.out.println("Error. Session Key is null.");
-        return null;
+        if (s != null) {
+            System.out.println("Session Key is: " + s);
+            return s;
+        } else {
+            System.out.println("Error. Session Key is null.");
+            return null;
+        }
     }
-}
 
-@CrossOrigin()
-@PostMapping("/tokenIsValid")
-public TokenIsValidResponse tokenIsValid(TokenIsValidRequest r) {
-    return new TokenIsValidResponse(
-        SessionRepository.isValid(r.sessionKey)
-    );
-}
+    @CrossOrigin()
+    @PostMapping("/tokenIsValid")
+    public TokenIsValidResponse tokenIsValid(TokenIsValidRequest r) {
+        return new TokenIsValidResponse(
+                SessionRepository.isValid(r.sessionKey)
+        );
+    }
+
+    @CrossOrigin()
+    @PostMapping('/logout')
+    public void deleteKey(TokenIsValidRequest r){
+        SessionRepository.deleteToken(r.sessionKey);
+    }
 }
