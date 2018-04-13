@@ -22,7 +22,7 @@
     );
 
     create table if not exists sessions(
-    id serial references users(id),
+    id serial references users(id) ON DELETE CASCADE,
     session_key text default null
     );
 

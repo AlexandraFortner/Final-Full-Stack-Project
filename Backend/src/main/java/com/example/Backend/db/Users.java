@@ -1,8 +1,8 @@
 package com.example.Backend.db;
 
-import com.example.Backend.core.User;
-import com.example.Backend.dto.NewUser;
-import com.example.Backend.db.Connect;
+import com.example.Backend.core.*;
+import com.example.Backend.dto.*;
+import com.example.Backend.db.*;
 import java.sql.*;
 import java.util.*;
 
@@ -78,18 +78,21 @@ public class Users {
         }
     }
 
-    public static boolean deleteUser(String key){
+    public static boolean deleteUser(String username){
         try {
+            System.out.println("We are in deleteUser: " + username);
             Connection conn = Connect.connect();
             PreparedStatement preparedStatement = conn.prepareStatement(
-                    "DELETE FROM users WHERE session_key = ?"
+                    "DELETE FROM users WHERE username = ?"
             );
-            preparedStatement.setString(1, key);
-            preparedStatement.execute();
+            preparedStatement.setString(1, username);
+
+            preparedStatement.executeUpdate();// if any sessions exist for that key, this will pass
             conn.close();
+            System.out.println("Sucessfully deleted!");
             return true;
-        }
-        catch (SQLException e){
+
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
         }

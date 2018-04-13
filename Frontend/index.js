@@ -330,28 +330,31 @@ function initializeProfileView() {
         event.preventDefault();
         window.localStorage.removeItem('sessionKey');
         window.location.reload();
-        isLoggedIn()
+        isLoggedIn();
     });
     $('#delete-user-button').click(function (event) {
         event.preventDefault();
+        console.log(window.localStorage.getItem('username'));
         $.ajax({
             url: 'http://localhost:8080/deleteUser',
             method: 'post',
             crossDomain: true,
             data: JSON.stringify({
-                sessionKey: window.localStorage.getItem('sessionKey')
+                username: window.localStorage.getItem('username')
             }),
             contentType: 'application/json',
             error: function (data, status, er) {
                 alertify.alert('ERROR.');
             },
             success: function (data) {
+                window.localStorage.removeItem('sessionKey');
+                window.localStorage.removeItem('username');
                 // console.log(data);
                 // BELOW SETS THE AUTHOR NAME FOR THE WHOLE OF THE SESSION UNTIL USER LOGS OUT
                 // validations.AuthorName = $('#log-in-username-input').val();
                 validations.IsLoggedIn = false;
                 window.location.reload();
-                IsLoggedIn();
+                isLoggedIn();
             }
         });
     });

@@ -17,8 +17,9 @@ public class UserController {
 
     @CrossOrigin()
     @PostMapping("/deleteUser")
-    public boolean deleteUser(SessionKey key) {
-        Boolean delete = Users.deleteUser(key.sessionKey);
+    public boolean deleteUser(@RequestBody DeleteUserRequest r) {
+        System.out.println("USER IS: " + r.username);
+        Boolean delete = Users.deleteUser(r.username);
         if (delete != false) {
             return delete;
         } else {
