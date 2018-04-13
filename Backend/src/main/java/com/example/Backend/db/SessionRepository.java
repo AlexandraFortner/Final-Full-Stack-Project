@@ -25,11 +25,16 @@ public class SessionRepository {
         }
     }
 
-    public static boolean deleteToken(String sessionKey) {
+    public static boolean deleteToken(String sessionKey){
         try {
             Connection conn = Connect.connect();
             PreparedStatement preparedStatement = conn.prepareStatement(
-                    "delete FROM sessions WHERE session_key = ?"
+//                    "delete FROM users WHERE session_key = ?" +
+                            "DELETE u" +
+                            "FROM users u" +
+                            "       INNER JOIN sessions s" +
+                            "               ON u.id = s.id" +
+                            "                  where session_key = ?"
             );
             preparedStatement.setString(1,sessionKey);
 

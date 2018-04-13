@@ -47,7 +47,7 @@ function signUpMaybeEnableButton() {
 
 function isLoggedIn() {
     if (validations.IsLoggedIn == false) {
-        console.log('The user is not logged in.');
+        validations.AuthorName = window.localStorage.getItem('username');
         $('#new-story-form').attr('hidden', 'hidden');
         $('#stories').attr('hidden', 'hidden');
         $('#about').attr('hidden', 'hidden');
@@ -56,7 +56,6 @@ function isLoggedIn() {
         // $('#sign-up').removeAttr('hidden');
         $('#log-in').removeAttr('hidden');
     } else if (validations.IsLoggedIn == true) {
-        console.log('The user is logged in.');
         $('#stories').removeAttr('hidden');
         $('#navbar').removeAttr('hidden');
         $('#sign-up').attr('hidden', 'hidden');
@@ -146,10 +145,10 @@ function profile() {
         [
             "<div id='profile-information'>",
             "<div style='font-size: 24px;'>" + validations.AuthorName + "</div>",
-            "<button id='log-out-button' class='signup-login-button'>Log-Out</button><br>",
-            "<button id='delete-user-button' class='signup-login-button'>Delete Profile</button>",
+            "<i class='fas fa-user-times'></i>&nbsp;<button id='log-out-button' class='signup-login-button'>Log-Out</button><br>",
+            "<i class='fas fa-trash-alt'></i>&nbsp;<button id='delete-user-button' class='signup-login-button'>Delete Profile</button>",
             "</div></div>"
-        ].join("")
+        ].join("");
     return "<h3>Username:</h3>" + profileStructure;
 }
 //STOPS DISPLAYING INFORMATION IN HTML
@@ -331,10 +330,35 @@ function initializeProfileView() {
         event.preventDefault();
         window.localStorage.removeItem('sessionKey');
         window.location.reload();
+        isLoggedIn()
+    });
+    $('#delete-user-button').click(function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: 'http://localhost:8080/deleteUser',
+            method: 'post',
+            crossDomain: true,
+            data: JSON.stringify({
+                sessionKey: window.localStorage.getItem('sessionKey')
+            }),
+            contentType: 'application/json',
+            error: function (data, status, er) {
+                alertify.alert('ERROR.');
+            },
+            success: function (data) {
+                // console.log(data);
+                // BELOW SETS THE AUTHOR NAME FOR THE WHOLE OF THE SESSION UNTIL USER LOGS OUT
+                // validations.AuthorName = $('#log-in-username-input').val();
+                validations.IsLoggedIn = false;
+                window.location.reload();
+                IsLoggedIn();
+            }
+        });
     });
 }
 
 function moveNewStoryToExistingStories() {
+    //THE FIRST BELOW VARIABLE IS CURRENTLY NOT WORKING DUE TO SESSION KEY IMPLEMENTATION
     let author = validations.AuthorName;
     let title = $('title').val();
     let story = $('story').val();
@@ -354,9 +378,6 @@ function registerSignUpHandler() {
         validations.IsLoggedIn = true;
         isLoggedIn();
 
-        // BELOW SETS THE AUTHOR NAME FOR THE WHOLE OF THE SESSION UNTIL USER LOGS OUT
-        validations.AuthorName = $('#sign-up-username-input').val();
-
         $.ajax({
             url: 'http://localhost:8080/signup/',
             method: 'post',
@@ -374,6 +395,10 @@ function registerSignUpHandler() {
             success: function (data) {
                 // console.log(data);
                 validations.IsLoggedIn = true;
+
+                window.localStorage.setItem('sessionKey', data);
+                window.localStorage.setItem('username', $('#sign-up-username-input').val());
+                validations.AuthorName = window.localStorage.getItem('username');
                 isLoggedIn();
                 showStories();
                 showUsers();
@@ -398,16 +423,21 @@ function registerLogInHandler() {
             error: function (data, status, er) {
                 alertify.alert('Wrong information. Try again.');
             },
-            success: function (data) {
-                // console.log(data);
-                // BELOW SETS THE AUTHOR NAME FOR THE WHOLE OF THE SESSION UNTIL USER LOGS OUT
-                validations.AuthorName = $('#log-in-username-input').val();
-                validations.IsLoggedIn = true;
-                window.localStorage.setItem('sessionKey', data);
-                isLoggedIn();
-                showStories();
-                showUsers();
-                initializeProfileView();
+            success: function (key) {
+                if (key) {
+                    // BELOW SETS THE AUTHOR NAME FOR THE WHOLE OF THE SESSION UNTIL USER LOGS OUT
+                    // validations.AuthorName = $('#log-in-username-input').val();
+                    validations.IsLoggedIn = true;
+                    window.localStorage.setItem('sessionKey', key);
+                    window.localStorage.setItem('username', $('#log-in-username-input').val());
+                    isLoggedIn();
+                    showStories();
+                    showUsers();
+                    initializeProfileView();
+                } else {
+                    // invalid username/password
+                    alertify.alert('Wrong information. Try again.');
+                }
             }
         });
     });
@@ -433,7 +463,7 @@ function postToNewStoryRoute(author, title, story, genre, storySummary) {
 
 document.getElementById('new-story-form').onsubmit = event => {
     event.preventDefault();
-    alertify.log('Submitted');
+    alertify.log('Submitted!');
     let form = event.target;
     let author = validations.AuthorName;
     let title = form.title.value;
@@ -471,8 +501,8 @@ function checkForExistingLogin() {
         }).then(response => response.json())
             .then(j => {
                 validations.IsLoggedIn = j.isValid;
+                validations.AuthorName = window.localStorage.getItem('username');
             });
-        isLoggedIn();
     } else {
         return new Promise((resolve, reject) => resolve());
     }

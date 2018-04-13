@@ -1,5 +1,5 @@
 package com.example.Backend.dto;
 
-public class TokenIsValidRequest {
+public class SessionKey {
     public String sessionKey;
 }

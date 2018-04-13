@@ -25,4 +25,16 @@ public class StoryController {
     public Story newStory(@RequestBody NewStory story) {
         return Stories.create(story);
     }
+
+//    @CrossOrigin()
+//    @PostMapping("/deleteStory")
+//    public boolean deleteStory(Story story) {
+//        Boolean delete = Stories.deleteStory(story);
+//        if (delete != false) {
+//            return delete;
+//        } else {
+//            System.out.println("Error.");
+//            return false;
+//        }
+//    }
 }

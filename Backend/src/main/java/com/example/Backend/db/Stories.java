@@ -70,6 +70,24 @@ public class Stories {
             return null;
         }
     }
+
+//    public static boolean deleteStory(Story story){
+//        try {
+//            Connection conn = Connect.connect();
+//            PreparedStatement preparedStatement = conn.prepareStatement(
+//                    "delete FROM stories WHERE id = ?"
+//            );
+//            preparedStatement.setString(1,story.id);
+//
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//            resultSet.next(); // if any sessions exist for that key, this will pass
+//            conn.close();
+//            return true;
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//            return false;
+//        }
+//    }
     //        public static void List<Story> allGenres() {
             // connect
             // SELECT * FROM genre;

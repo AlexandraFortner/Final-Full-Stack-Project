@@ -35,3 +35,7 @@
 --    UPDATE stories SET story_summary = 'The very first story made for Nova.' where id = 1;
 
 --____________________________________________________________________________________________
+
+--select * from users u
+--join sessions s
+--on u.id = s.id where u.id = ?;

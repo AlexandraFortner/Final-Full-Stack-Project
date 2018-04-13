@@ -78,27 +78,25 @@ public class Users {
         }
     }
 
-//    public static boolean deleteUser(NewUser user){
-//        try {
-//            Connection conn = Connect.connect();
-//            PreparedStatement preparedStatement = conn.prepareStatement(
-//                    "DELETE FROM users WHERE username = ?"
-//            );
-//            preparedStatement.setStr(1, NewUser);
-//            preparedStatement.execute();
-//            conn.close();
-//            return true;
-//        }
-//        catch (SQLException e){
-//            System.out.println(e.getMessage());
-//            return false;
-//        }
-//    }
+    public static boolean deleteUser(String key){
+        try {
+            Connection conn = Connect.connect();
+            PreparedStatement preparedStatement = conn.prepareStatement(
+                    "DELETE FROM users WHERE session_key = ?"
+            );
+            preparedStatement.setString(1, key);
+            preparedStatement.execute();
+            conn.close();
+            return true;
+        }
+        catch (SQLException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
 
     public static String sessionKey(String u, String pw) {
         try{
-//            System.out.println("Username: " + u);
-//            System.out.println("Password: " + pw);
             String random_items = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789!@~$%^&*-";
             String[] random = random_items.split("");
             String sessionKey = "";

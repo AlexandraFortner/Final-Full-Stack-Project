@@ -1,12 +1,9 @@
 package com.example.Backend.controllers;
 
-import com.example.Backend.core.Story;
-import com.example.Backend.core.User;
-import com.example.Backend.db.Connect;
 import com.example.Backend.db.SessionRepository;
 import com.example.Backend.db.Users;
 import com.example.Backend.dto.Login;
-import com.example.Backend.dto.TokenIsValidRequest;
+import com.example.Backend.dto.SessionKey;
 
 import com.example.Backend.dto.TokenIsValidResponse;
 
@@ -14,10 +11,6 @@ import com.example.Backend.dto.TokenIsValidResponse;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.mindrot.jbcrypt.BCrypt;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 @RestController
 public class LoginController {
@@ -45,15 +38,15 @@ public class LoginController {
 
     @CrossOrigin()
     @PostMapping("/tokenIsValid")
-    public TokenIsValidResponse tokenIsValid(TokenIsValidRequest r) {
+    public TokenIsValidResponse tokenIsValid(SessionKey r) {
         return new TokenIsValidResponse(
                 SessionRepository.isValid(r.sessionKey)
         );
     }
 
     @CrossOrigin()
-    @PostMapping('/logout')
-    public void deleteKey(TokenIsValidRequest r){
+    @PostMapping("/logout")
+    public void deleteKey(SessionKey r){
         SessionRepository.deleteToken(r.sessionKey);
     }
 }
