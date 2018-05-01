@@ -126,7 +126,7 @@ function story(stories) {
             "</div></div>"
         ].join("")
     }).join("");
-    return "<h3>All Stories:</h3>" + storyStructure;
+    return "<h3>The Galaxy:</h3>" + storyStructure;
 }
 
 function user(users) {
@@ -137,19 +137,19 @@ function user(users) {
             "</div></div>"
         ].join("")
     }).join("");
-    return "<h3>All Users:</h3>" + userStructure;
+    return "<h3>AstroAuthors:</h3>" + userStructure;
 }
 
 function profile() {
     var profileStructure =
         [
             "<div id='profile-information'>",
-            "<div style='font-size: 24px;'>" + validations.AuthorName + "</div>",
+            "<div style='font-size: 30px;'>" + validations.AuthorName + "</div>",
             "<i class='fas fa-user-times'></i>&nbsp;<button id='log-out-button' class='signup-login-button'>Log-Out</button><br>",
             "<i class='fas fa-trash-alt'></i>&nbsp;<button id='delete-user-button' class='signup-login-button'>Delete Profile</button>",
             "</div></div>"
         ].join("");
-    return "<h3>Username:</h3>" + profileStructure;
+    return profileStructure;
 }
 //STOPS DISPLAYING INFORMATION IN HTML
 //.CLICKS BEGIN ||| THE "DIFFERENT PAGES" BEGIN
@@ -363,15 +363,11 @@ function initializeProfileView() {
 function moveNewStoryToExistingStories() {
     //THE FIRST BELOW VARIABLE IS CURRENTLY NOT WORKING DUE TO SESSION KEY IMPLEMENTATION
     let author = validations.AuthorName;
-    let title = $('title').val();
-    let story = $('story').val();
-    let genre = $('genre').val();
-    let storySummary = $('storySummary').val();
-    // let existingStoriesDiv = document.getElementById('existing-stories');
-    $("existing-stories").html("<li>" + story + "</li>")
-    let newLi = document.createElement('li');
-    // newLi.innerText = story;
-    // existingStoriesDiv.appendChild(newLi);
+    let title = $('#title').val();
+    let story = $('#story').val();
+    let genre = $('#genre').val();
+    let storySummary = $('#storySummary').val();
+    $("#existing-stories").html("<li>" + story + "</li>")
 }
 
 // HELPED
